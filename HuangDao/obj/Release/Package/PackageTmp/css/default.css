@@ -1,0 +1,222 @@
+.container {
+    margin:0px;
+}
+.container div {
+    border-width: 0px;
+
+}
+
+.solar_year_month {
+    Height: 25px;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+.solar_calender {
+    float: left;
+    background-color: #F8C8EE;
+    width: 40%;
+}
+.solar_date {
+    font-size: 6em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #FFE8E8;
+    height: 128px;
+}
+.ancient_calender {
+    float: left;
+    background-color: #FFF5C3;
+    width: 60%;
+}
+.weekday {
+    Height: 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+}
+.ancient_ymdt {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    /* background-color: #FFF; */
+}
+.ancient_ymdt div {
+    /* display: inline-block; */
+    /* text-align: center; */
+    /* vertical-align:middle; */ /*very important attrribute*/
+}
+.img_div{
+    float:left;
+    margin-right:8px;
+    width: 60px;
+    height: 60px;
+}
+.zodiac {
+    height: 60px;
+    width: 60px;
+    /* background-color: #ffee00; */
+    border: 0px;
+    /* display: inline-block; */
+}
+
+.ancient_year_month, .ancient_day_time{
+    /* background-color: #FDB4B4; */
+}
+
+.ancient_year,
+.ancient_month ,
+.ancient_day,
+.ancient_time {
+    background-color: #FFEFAE;
+    padding: 6px 4px 5px 4px;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    margin-right:5px;
+    min-width: 3em;
+    display: inline-block;
+}
+
+.ancient_year{
+    float:left;
+}
+
+.ancient_day {
+   float:left;
+}
+.yi_time,.ji_time{
+    clear: both;
+    padding-left: 10px;
+    
+    background-color: #FAE3AB;
+}
+
+.ancient_yiji{
+    margin-top: 8px;
+    font-size:0.5em;
+    font-weight:bold;
+    color: #A77201;
+}
+
+.ancient_yiji div {
+    margin-left: 10px;
+    margin-bottom: 3px;
+    padding: 3px;
+ 
+}
+.lunar_month_day {
+    padding: 8px 3px 5px 8px;
+    background-color: #FFF7D8;
+    clear: both;
+    
+    font-size: 16pt;
+    font-weight: bold;
+}
+.title {
+    float: left;
+    margin-right:10px;
+    background-color: #FF9191;
+    padding:4px 5px 3px 3px;
+    border-radius: 5px;
+    color: white;
+}
+.events_list {
+   /* background-color: #FFF0F0; */
+   font-weight:normal;
+   display:inline-block;
+   padding: 4px 5px 3px 0px;
+}
+
+.title.bad{
+    background-color: #AEB4F8;
+
+}
+
+.events_list.bad a{
+    background-color: #DFE8FC;
+    color: #0035BD;
+}
+
+.events_list a{
+    margin-right:5px;
+    margin-bottom: 4px;
+    background-color: #FCEDED;
+    padding: 5px;
+    color: #FF1818;
+    border-radius: 3px;
+    font-size: 0.7em;
+    display: inline-block;
+}
+
+.yi_container,
+.ji_container,
+.good_angel_yi,
+.bad_angel_ji,
+.peng_ji,
+.collide,
+.five_elem
+{
+    /* background-color: #FEFFDB; */
+}
+
+.yi_container,
+.ji_container,
+.good_angel_yi,
+.bad_angel_ji,
+.peng_ji,
+.collide,
+.five_elem,
+.dumy div{
+    padding: 8px 3px 5px 8px;
+    /* background-color: #aaa; */
+    font-size: 16pt;
+    font-weight: bold;
+    
+}
+
+
+#keywords_yi {
+    clear: both;
+}
+
+#keywords_yi span {
+    background-color: #feecec;
+    color: #ff0000;
+    margin: 1px 4px 3px 0px;
+    padding: 8px 6px 6px 6px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    float: left;
+    line-height: 1em;
+}
+
+#keywords_yi span:hover {
+    background-color: #ff0000;
+    color: #feecec;
+}
+
+#keywords_ji {
+    clear: both;
+}
+
+#keywords_ji span {
+    background-color: #dee6ee;
+    color: #0051a2;
+    margin: 1px 4px 3px 0px;
+    padding: 8px 6px 6px 6px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    float: left;
+    line-height: 1em;
+}
+
+#keywords_ji span:hover {
+    background-color: #0051a2;
+    color: #dee6ee;
+}
+
+.content_list li {
+    clear: both;
+}

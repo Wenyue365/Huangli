@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script src="Scripts/jquery-1.7.1.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id='target'></div>
+    <div>
+        <input type="button" id="btnGo" value="Go Test" onclick="onclick_Go()" />
+    </div>
+    <script type="text/javascript">
+
+
+        function onclick_Go(){
+            $('target').innerHTML = "Hello world !";
+
+            /*var myRequest = new Request({ url: 'http://xwearon.yun03.yhosts.com/HuangdaoWS.asmx/getWordAbstract' });
+            myRequest.post('word=祭祀');*/
+
+            $.ajax({
+
+                url: "/HuangdaoWS.asmx/getWordAbstract",
+                type: 'POST',
+                dataType: 'application/x-www-form-urlencoded',
+                data: "word=嫁娶",
+                success: function (data) {
+
+                    $('target').innerHTML = "It works !";
+
+                }
+
+            });
+
+        }
+    </script>
+
+
+</body>
+</html>

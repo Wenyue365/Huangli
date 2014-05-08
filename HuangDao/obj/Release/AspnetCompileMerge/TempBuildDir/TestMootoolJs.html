@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="jslib/mootools-core-1.4.5.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="divOutput"></div>
+    <input type="button" value="Test Mootools JS" onclick="onclick_Go()"/>
+    <script type="text/javascript">
+        function onclick_Go(){
+            var request = new Request({
+                url: "/HuangdaoWS.asmx/getWordAbstract",
+                method: "post",
+                data: JSON.encode({ word: "祭祀" }),
+                headers: { "Content-Type": "application/json; charset=utf8" },
+                onSuccess: function (responseText) {
+                    var obj = JSON.decode(responseText);
+                    $("divOutput").set("text", obj.d);
+                },
+                onFailure: function () {
+                    $("divOutput").set("text", "request error");
+                },
+                onComplete: function () {
+                    $("divOutput").set("text", "end request");
+                }
+            });
+
+            request.send();
+
+        }
+
+    </script>
+</body>
+
+</html>
