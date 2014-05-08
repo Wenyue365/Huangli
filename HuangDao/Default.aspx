@@ -221,11 +221,11 @@ color: transparent;
                 <!-- 公历年月日 -->
                 <div class="solar_year_month"><span id="xSolarYear" runat="server"></span>年<span id="xSolarMonth" runat="server"></span>月</div>
                 <div class="solar_date"><span id="xSolarDate" runat="server"></span></div>
-                <div class="lunar_month_day"> <span id="xLunarDate" runat="server"></span></div>
+                <div class="weekday">星期<span id="xWeekday" runat="server"></span></div>
             </div>
             <div class="ancient_calender">
                 <!--星期及古代历法-->
-                <div class="weekday">星期<span id="xWeekday" runat="server"></span></div>
+                <div class="lunar_month_day"> <span id="xLunarDate" runat="server"></span></div>
                 <div class="ancient_ymdt">
                     <!--古历的年月日时及时宜、时忌-->
                     <div class="img_div"><img class="zodiac" alt="马年" src="./images/zodiac_horse.png" /></div>

@@ -91,7 +91,7 @@ namespace HuangDao
                     {
                         char[] sepCharsets =  {','};
                         string[] values = strLine.Split(sepCharsets);
-                        sc = values[3].Trim();
+                        sc = values[2].Trim();
                         break;
                     }
 
