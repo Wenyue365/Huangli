@@ -221,6 +221,7 @@ color: transparent;
                 <!-- 公历年月日 -->
                 <div class="solar_year_month"><span id="xSolarYear" runat="server"></span>年<span id="xSolarMonth" runat="server"></span>月</div>
                 <div class="solar_date"><span id="xSolarDate" runat="server"></span></div>
+                <div class="lunar_month_day"> <span id="xLunarDate" runat="server"></span></div>
             </div>
             <div class="ancient_calender">
                 <!--星期及古代历法-->
@@ -242,7 +243,7 @@ color: transparent;
                 </div>
             </div>
         </div>
-        <div class="lunar_month_day"> <span id="xLunarDate" runat="server"></span></div>
+        
         <div class="yi_container">
             <div class="title">宜</div>
             <div class="events_list"><span id="xYiEventsList" runat="server"></span></div>
