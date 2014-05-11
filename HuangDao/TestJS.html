@@ -7,6 +7,46 @@
     <title></title>
 </head>
 <body>
+    <style type="text/css">
+        #divMouseTest{
+            background:#00ff90;
+            padding:50px;
+        }
+        #TextArea{background:#ff0000;}
+    </style>
+    <div id="divMouseTest">
+        <span id="TextArea" style="font-size:3em" onclick="return onclick_divMouseTest(event)">测试</span>
+        <span id="posMouseX">x:</span>
+        <span id="posMouseY">y:</span>
+        <div>
+            <span id="txtOutput"></span>
+        </div>
+        <script type="text/javascript">
+            function goNextDay(i) {
+                $("#txtOutput").text("mouse click on " + "(" + i + ")");
+            }
+            function onclick_divMouseTest(event)
+            {
+                var x = event.pageX - $('#TextArea').offset().left;
+                var y = event.pageY - $('#TextArea').offset().top;
+                $("#posMouseX").text(x);
+                $("#posMouseY").text(y);
+
+                var Area = $("#TextArea");
+                
+                if (x > Area.width()/2)
+                {
+                    // mouse click on right area
+                    goNextDay(1);
+                }
+                else if (x < Area.width()/2)
+                {
+                    // mouse click on left area
+                    goNextDay(-1);
+                }
+            }
+        </script>
+    </div>
     <div id='target'></div>
     <div>
         <input type="button" id="btnGo" value="Go Test" onclick="onclick_Go()" />

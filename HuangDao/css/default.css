@@ -3,8 +3,6 @@
 }
 .container div {
     border-width: 0px;
-  
-
 }
 
 .calender_panel{
@@ -25,12 +23,36 @@
     width: 40%;
 }
 .solar_date {
-    font-size: 6em;
+    font-size: 5em;
     font-weight: bold;
     text-align: center;
     background-color: #FFE8E8;
     height: 100px;
 }
+
+.solar_date :after , .solar_date :before  {
+    content:"";
+    overflow:hidden;
+    width: 8px;
+    height: 20px;
+    background-image: url("../images/Huangdao_pics.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+}
+
+.solar_date :after {
+    left: 6%;
+    top: -20%;
+    background-position: -110px -15px;
+}
+
+.solar_date :before {
+    left: -7%;
+    top: -20%;
+    background-position: -11px -15px;
+}
+
 .ancient_calender {
     float: left;
     background-color: #FFF5C3;
@@ -41,7 +63,7 @@
     Height: 30px;
     font-size: 1em;
     font-weight: bold;
-    color: #AF7000;
+    color: #780088;
     padding: 10px;
     text-align: center;
 }

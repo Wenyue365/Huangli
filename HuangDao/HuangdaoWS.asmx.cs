@@ -91,7 +91,7 @@ namespace HuangDao
                     {
                         char[] sepCharsets =  {','};
                         string[] values = strLine.Split(sepCharsets);
-                        sc = values[2].Trim();
+                        sc = values[3].Trim();
                         break;
                     }
 
@@ -108,11 +108,10 @@ namespace HuangDao
         {
             string jsn_yi_dates = null;
             HdDBHelper db = new HdDBHelper();
-            if (db.initDb())
+            if (db != null)
             {
                 jsn_yi_dates = db.getHlYiDates(start_date, end_date, yi_word);
 
-                db.closeDb();
             }
 
             return jsn_yi_dates;
@@ -123,7 +122,7 @@ namespace HuangDao
         {
             string jsn_lunar = null;
              HdDBHelper db = new HdDBHelper();
-             if (db.initDb())
+             if (db != null)
              {
                  jsn_lunar = db.getLunarDate(year, month, day);
              }
@@ -136,7 +135,7 @@ namespace HuangDao
         {
             SinaHLDayEx hld = null;
             HdDBHelper db = new HdDBHelper();
-            if (db.initDb())
+            if (db != null)
             {
                 hld = db.getSinaHlInfo(year, month, day);
             }

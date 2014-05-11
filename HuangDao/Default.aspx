@@ -220,7 +220,7 @@ color: transparent;
             <div class="solar_calender">
                 <!-- 公历年月日 -->
                 <div class="solar_year_month"><span id="xSolarYear" runat="server"></span>年<span id="xSolarMonth" runat="server"></span>月</div>
-                <div class="solar_date"><span id="xSolarDate" runat="server"></span></div>
+                <div class="solar_date" id="xSolarDateDiv" onclick="return onclick_solarDate(event)"><span id="xSolarDate" runat="server"></span></div>
                 <div class="weekday">星期<span id="xWeekday" runat="server"></span></div>
             </div>
             <div class="ancient_calender">
@@ -275,7 +275,7 @@ color: transparent;
     </div>
 
     <script type="text/javascript">
-        /* 函数：获取SINA黄历信息 */
+        /* 函数：从WY服务器获取SINA黄历信息 */
         function getSinaHlInfo(y, m, d) {
             var baseUrl = location.href;
             var i = baseUrl.lastIndexOf("/");
@@ -291,13 +291,13 @@ color: transparent;
                     $("xAncientYear") .innerHTML =hld.m_yearOrder.Value;
                     $("xAncientMonth") .innerHTML =hld.m_monthOrder.Value;
                     $("xAncientDay") .innerHTML =hld.m_dayOrder.Value;
-                    $("xFiveElemEventsList") .innerHTML =hld.m_fiveElem.Value;
-                    $("xCollideEventsList") .innerHTML =hld.m_collide.Value;
-                    $("xPengAvoidEventsList") .innerHTML =hld.m_pengAvoid.Value;
-                    $("xGoodAngelYiEventsList") .innerHTML =hld.m_goodAngelYi.Value;
-                    $("xEvilAngelJiEventsList") .innerHTML =hld.m_evilAngelJi.Value;
-                    $("xYiEventsList") .innerHTML =hld.m_Yi.Value;
-                    $("xJiEventsList") .innerHTML =hld.m_Ji.Value;
+                    CreateEventsListCtrls($("xFiveElemEventsList"),hld.m_fiveElem.Value);
+                    CreateEventsListCtrls($("xCollideEventsList"),hld.m_collide.Value);
+                    CreateEventsListCtrls($("xPengAvoidEventsList"),hld.m_pengAvoid.Value);
+                    CreateEventsListCtrls($("xGoodAngelYiEventsList"),hld.m_goodAngelYi.Value);
+                    CreateEventsListCtrls($("xEvilAngelJiEventsList"),hld.m_evilAngelJi.Value);
+                    CreateEventsListCtrls($("xYiEventsList"),hld.m_Yi.Value);
+                    CreateEventsListCtrls($("xJiEventsList"),hld.m_Ji.Value);
                     // hld.m_birthGod.Value
                     // hld.m_solarDate.Value
                     // hld.m_zodiac.Value
@@ -325,6 +325,26 @@ color: transparent;
             request.send();
         }
 
+        function CreateEventsListCtrls(parentCtrl, strEvents)
+        {
+            // Remove the old events
+            var  children = parentCtrl.childNodes;
+            for (var i = 0; i < children.length; i++)
+            {
+                parentCtrl.removeChild(children[i]);
+            }
+
+            // Add events
+            var arrEventsList = strEvents.split(' ');
+
+            for (var i=0; i < arrEventsList.length; i++)
+            {
+                var lnk = document.createElement("a");
+                lnk.innerText = arrEventsList[i];
+                parentCtrl.appendChild(lnk);
+            }
+        }
+
         /* 设置Events-list的onclick 函数 */
         function setEvents_OnClickHandler(y, m, d){
             var queryDate = y + "-" + m + "-" + d;
@@ -344,6 +364,37 @@ color: transparent;
 </script>
 
 <script type="text/javascript">
+    // 处理用户跳转到前一天或下一天
+
+    function goNextDay(i) {
+        var xSolarYear = $("xSolarYear");
+        var xSolarMonth = $("xSolarMonth");
+        var xSolarDate = $("xSolarDate");
+
+        var y = parseInt(xSolarYear.innerHTML, 10);
+        var m = parseInt(xSolarMonth.innerHTML, 10);
+        var d = parseInt(xSolarDate.innerHTML, 10);
+        var nextDay = d + i;
+
+        initSolarDate(y, m, nextDay);
+
+        getSinaHlInfo(y, m, nextDay);
+    }
+    function onclick_solarDate(event) {
+        var x = event.pageX - $('xSolarDateDiv').offsetLeft;
+        var y = event.pageY - $('xSolarDateDiv').offsetTop;
+        var Area = $("xSolarDateDiv");
+        if (x > Area.offsetWidth / 2) {
+            // mouse click on right area
+            goNextDay(1);
+        }
+        else if (x < Area.offsetWidth / 2) {
+            // mouse click on left area
+            goNextDay(-1);
+        }
+    }
+    
+    // $("xSolarDateDiv").addEvent("onclick", onclick_solarDate);
 
     // 初始化当前日期按钮 
     function initCurrDate()
@@ -364,13 +415,34 @@ color: transparent;
         var xSolarMonth = $("xSolarMonth");
         xSolarMonth.innerHTML = month;
 
-        var arrWeekdays = ["一","二","三","四","五","六","日"];
+        var arrWeekdays = ["日","一","二","三","四","五","六"];
         var xWeekday = $("xWeekday");
         xWeekday.innerHTML = arrWeekdays[week_day];
 
-        // getSinaHlInfo(year, month, date);
         setEvents_OnClickHandler(year, month, date);
     }
+
+    // 设置当前的公历时间
+    function initSolarDate(y, m, d)
+    {
+        var dt = new Date(y, m-1, d);
+
+        var xSolarYear = $("xSolarYear");
+        xSolarYear.innerHTML = dt.getFullYear();
+
+        var xSolarMonth = $("xSolarMonth");
+        xSolarMonth.innerHTML = dt.getMonth()+1;
+
+        var xSolarDate = $("xSolarDate");
+        xSolarDate.innerHTML = dt.getDate();
+
+        var arrWeekdays = ["日","一", "二", "三", "四", "五", "六"];
+        var xWeekday = $("xWeekday");
+        xWeekday.innerHTML = arrWeekdays[dt.getDay()];
+
+        setEvents_OnClickHandler(dt.getFullYear(), dt.getMonth(), dt.getDate());
+    }
+
 
     //根据时间初始化下拉框
     function initHLQuery() {
@@ -398,7 +470,7 @@ color: transparent;
     }
 
     
-    //拉取黄历数据
+    //从Tencent拉取黄历数据
     function loadhlInfo() {
         var urlFID = 'http://cgi.data.astro.qq.com/astro/query.php?act=hl';
         urlFID += '&qyear=' + $("hlyear").value + '&qmonth=' + $("hlmonth").value + '&qday=' + $("hlday").value;
@@ -467,7 +539,7 @@ color: transparent;
    
     //初始化操作
     initCurrDate();
-    initHLQuery();
+    //initHLQuery();
    
 </script>
          

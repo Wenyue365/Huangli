@@ -5,6 +5,7 @@ using System.Web;
 using MySql.Data.MySqlClient;
 using AstroSpider;
 using System.Data;
+using System.Diagnostics;
 
 namespace HuangDao
 {
@@ -17,12 +18,23 @@ namespace HuangDao
         const string db_pass = "wenyue365$$$";
         const string db_charset = "utf8"; // this value is query from the DB
 
-        string m_connString = null;
-        MySqlConnection m_connSql = null;
+        static int ref_count = 0;
+        static string m_connString = null;
+        static MySqlConnection m_connSql = null;
 
         public HdDBHelper()
         {
+            ref_count++;
 
+            initDb(); 
+        }
+
+        ~HdDBHelper()
+        {
+            if (--ref_count == 0)
+            {
+                closeDb(); // Release the MySQL connection resource
+            }
         }
 
         string connStringBuilder(string host, int port, string dbname, string username, string password, string charset)
@@ -31,7 +43,7 @@ namespace HuangDao
                 host, port, dbname, username, password, charset);
             return cs;
         }
-        public bool initDb()
+        private bool initDb()
         {
             bool result = true;
 
@@ -43,23 +55,32 @@ namespace HuangDao
                     m_connSql = new MySqlConnection(m_connString);
 
                     m_connSql.Open();
+
+                    Debug.WriteLine(">> {0} : Create MySQL DB connection successfully.", DateTime.Now.ToShortTimeString());
                 }
                 catch (MySqlException e)
                 {
                     result = false;
-
+                    
                     m_connSql = null;
                 }
             }
 
+            if (m_connSql.State == ConnectionState.Closed)
+            {
+                m_connSql.Open();
+            }
+
             return result;
         }
-        public void closeDb()
+        private void closeDb()
         {
             if (m_connSql != null)
             {
                 m_connSql.Close();
                 m_connSql = null;
+
+                Debug.WriteLine(">> {0} : Closed MySQL DB connection successfully.", DateTime.Now.ToShortTimeString());
             }
         }
         bool saveToDb(TXHuangDaoDay hdd)
@@ -87,6 +108,11 @@ namespace HuangDao
 
         public TXHuangDaoDay selectHlData(string where_clause)
         {
+            if (!initDb())
+            {
+                return null;
+            }
+
             TXHuangDaoDay hdd = null;
 
             try
@@ -129,6 +155,11 @@ namespace HuangDao
 
         public string getHlYiDates(DateTime start_date, DateTime end_date, string yi_word)
         {
+            if (!initDb())
+            {
+                return null;
+            }
+
             string jsn_yiDates = null;
 
             try
@@ -164,6 +195,10 @@ namespace HuangDao
         public string getLunarDate(int year, int month, int day)
         {
             string jsn_lunar = null;
+            if (!initDb())
+            {
+                return null;
+            }
             DateTime solarDate = new DateTime(year, month, day);
 
             try
@@ -198,6 +233,11 @@ namespace HuangDao
 
         public SinaHLDayEx getSinaHlInfo(int year, int month, int day)
         {
+            if (!initDb())
+            {
+                return null;
+            }
+
             DateTime solarDate = new DateTime(year, month, day);
             SinaHLDayEx hld = null;
 
@@ -228,18 +268,18 @@ namespace HuangDao
                     hld.m_Yi         .Value = sqlReader.GetString("yi");
                     hld.m_Ji         .Value = sqlReader.GetString("ji");
 
-                    sqlReader.Close();
                 }
+                sqlReader.Close(); // 必须关闭
+                cmdSql = null;
+                sqlReader = null;
             }
             catch (MySqlException ex)
             {
                 hld = null;
+                Debug.Write(ex.Message);
             }
 
             return hld;
         }
     }
-
-
-
 }
