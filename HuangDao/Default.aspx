@@ -273,6 +273,14 @@ color: transparent;
             <div class="events_list"><span id="xFiveElemEventsList" runat="server"></span></div>
         </div>
     </div>
+    <div class="bottom_nav_toolbar" id="bottomNavToolbar">
+        <ul>
+            <li><a href="./Default.aspx">黄历</a></li>
+            <li><a href="./BestTodo.aspx">宜忌</a></li>
+            <li><a href="./Divine.aspx">测算</a></li>
+            <li><a href="./Setting.aspx">设置</a></li>
+        </ul>
+    </div>
 
     <script type="text/javascript">
         /* 函数：从WY服务器获取SINA黄历信息 */
@@ -328,10 +336,9 @@ color: transparent;
         function CreateEventsListCtrls(parentCtrl, strEvents)
         {
             // Remove the old events
-            var  children = parentCtrl.childNodes;
-            for (var i = 0; i < children.length; i++)
+            while (parentCtrl.firstChild)
             {
-                parentCtrl.removeChild(children[i]);
+                parentCtrl.removeChild(parentCtrl.firstChild);
             }
 
             // Add events

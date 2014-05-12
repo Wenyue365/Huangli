@@ -214,6 +214,34 @@
     
 }
 
+.bottom_nav_toolbar{
+     clear:both;
+     height: 1.5em;
+     background-color: #C40000;
+     padding: 1em 1em 0.7em 1em;
+     margin-top: 20px;
+     color: white;
+     font-weight: bold;
+     font-size:1.2em;
+}
+
+.bottom_nav_toolbar ul{
+    list-style:none;
+    margin:0px;
+    padding:0px;
+
+}
+
+.bottom_nav_toolbar ul li{
+    float:left;
+
+}
+
+.bottom_nav_toolbar ul li a {
+   text-decoration:none;
+   color:white;
+}
+
 
 #keywords_yi {
     clear: both;

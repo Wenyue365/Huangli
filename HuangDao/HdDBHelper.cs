@@ -46,10 +46,9 @@ namespace HuangDao
         private bool initDb()
         {
             bool result = true;
-
-            if (m_connSql == null) // Open DB connection when it is null
+            try
             {
-                try
+                if (m_connSql == null) // Open DB connection when it is null
                 {
                     m_connString = connStringBuilder(db_host, db_port, db_name, db_user, db_pass, db_charset);
                     m_connSql = new MySqlConnection(m_connString);
@@ -58,17 +57,17 @@ namespace HuangDao
 
                     Debug.WriteLine(">> {0} : Create MySQL DB connection successfully.", DateTime.Now.ToShortTimeString());
                 }
-                catch (MySqlException e)
+                else if (m_connSql.State != ConnectionState.Open)// Re-Open the DB connection when it is not OPEN
                 {
-                    result = false;
-                    
-                    m_connSql = null;
+                    m_connSql.Open();
                 }
             }
-
-            if (m_connSql.State == ConnectionState.Closed)
+            catch (MySqlException e)
             {
-                m_connSql.Open();
+                result = false;
+                m_connSql = null;
+
+                Debug.WriteLine(e.Message);
             }
 
             return result;

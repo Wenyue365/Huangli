@@ -18,6 +18,7 @@ namespace HuangDao
             DateTime td = DateTime.Now;
 
             SinaHLDayEx hld = hdSvcs.getSinaHlInfo(td.Year, td.Month, td.Day);
+            Debug.WriteLine(string.Format("Get Sina Huangli Info :{0}, {1}, {2}", td.Year, td.Month, td.Day));
 
             if (hld != null)
             {
