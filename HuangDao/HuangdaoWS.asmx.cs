@@ -138,6 +138,7 @@ namespace HuangDao
             if (db != null)
             {
                 hld = db.getSinaHlInfo(year, month, day);
+
             }
 
             return hld;

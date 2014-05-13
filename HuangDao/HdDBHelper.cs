@@ -6,6 +6,8 @@ using MySql.Data.MySqlClient;
 using AstroSpider;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
 
 namespace HuangDao
 {
@@ -31,7 +33,9 @@ namespace HuangDao
 
         ~HdDBHelper()
         {
-            if (--ref_count == 0)
+            --ref_count;
+
+            if (ref_count == 0)
             {
                 closeDb(); // Release the MySQL connection resource
             }
@@ -55,7 +59,7 @@ namespace HuangDao
 
                     m_connSql.Open();
 
-                    Debug.WriteLine(">> {0} : Create MySQL DB connection successfully.", DateTime.Now.ToShortTimeString());
+                    Writelog("Open MySQL DB connection successfully.");
                 }
                 else if (m_connSql.State != ConnectionState.Open)// Re-Open the DB connection when it is not OPEN
                 {
@@ -67,7 +71,7 @@ namespace HuangDao
                 result = false;
                 m_connSql = null;
 
-                Debug.WriteLine(e.Message);
+                Writelog(e.Message);
             }
 
             return result;
@@ -79,16 +83,12 @@ namespace HuangDao
                 m_connSql.Close();
                 m_connSql = null;
 
-                Debug.WriteLine(">> {0} : Closed MySQL DB connection successfully.", DateTime.Now.ToShortTimeString());
+                Writelog("Closed MySQL DB connection successfully.");
             }
         }
         bool saveToDb(TXHuangDaoDay hdd)
         {
             bool result = false;
-            if (!initDb())
-            {
-                return false;
-            }
 
             string cmdText = string.Format("INSERT INTO wy_huangli(fid, showtime, lunerdate, goodtodo, badtodo) VALUES(\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\')",
                              hdd.FID, hdd.ShowTime, hdd.LunerDate, hdd.GoodToDo, hdd.BadToDo);
@@ -107,10 +107,6 @@ namespace HuangDao
 
         public TXHuangDaoDay selectHlData(string where_clause)
         {
-            if (!initDb())
-            {
-                return null;
-            }
 
             TXHuangDaoDay hdd = null;
 
@@ -154,10 +150,6 @@ namespace HuangDao
 
         public string getHlYiDates(DateTime start_date, DateTime end_date, string yi_word)
         {
-            if (!initDb())
-            {
-                return null;
-            }
 
             string jsn_yiDates = null;
 
@@ -194,10 +186,7 @@ namespace HuangDao
         public string getLunarDate(int year, int month, int day)
         {
             string jsn_lunar = null;
-            if (!initDb())
-            {
-                return null;
-            }
+
             DateTime solarDate = new DateTime(year, month, day);
 
             try
@@ -232,11 +221,6 @@ namespace HuangDao
 
         public SinaHLDayEx getSinaHlInfo(int year, int month, int day)
         {
-            if (!initDb())
-            {
-                return null;
-            }
-
             DateTime solarDate = new DateTime(year, month, day);
             SinaHLDayEx hld = null;
 
@@ -275,10 +259,35 @@ namespace HuangDao
             catch (MySqlException ex)
             {
                 hld = null;
-                Debug.Write(ex.Message);
+                
+                Writelog(ex.Message);
             }
 
             return hld;
+        }
+
+        static void Writelog(string log_str)
+        {
+            string logfilename = string.Format("db_log_{0}.log",DateTime.Now.ToLongDateString());
+            string data_path = HttpContext.Current.Server.MapPath("~/log/" + logfilename);
+
+            try
+            {
+                FileStream fs = new FileStream(data_path, FileMode.OpenOrCreate|FileMode.Append);
+                if (fs != null)
+                {
+                    TextWriter tr = new StreamWriter(fs, Encoding.UTF8);
+
+                    tr.WriteLine(DateTime.Now.ToLongTimeString() + ": " + log_str);
+
+                    tr.Close();
+                    fs.Close();
+                }
+            }
+            catch(IOException ie)
+            {
+                Debug.Write(ie.Message);    
+            }
         }
     }
 }

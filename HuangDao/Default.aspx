@@ -278,7 +278,7 @@ color: transparent;
             <li><a href="./Default.aspx">黄历</a></li>
             <li><a href="./BestTodo.aspx">宜忌</a></li>
             <li><a href="./Divine.aspx">测算</a></li>
-            <li><a href="./Setting.aspx">设置</a></li>
+            <li><a href="./Settings.aspx">设置</a></li>
         </ul>
     </div>
 

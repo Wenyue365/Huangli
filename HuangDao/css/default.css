@@ -216,10 +216,11 @@
 
 .bottom_nav_toolbar{
      clear:both;
-     height: 1.5em;
+     height: 1em;
      background-color: #C40000;
-     padding: 1em 1em 0.7em 1em;
-     margin-top: 20px;
+     padding-top: 0.5em;
+     padding-bottom: 0.5em;
+     /* margin-top: 10px; */
      color: white;
      font-weight: bold;
      font-size:1.2em;
@@ -234,6 +235,8 @@
 
 .bottom_nav_toolbar ul li{
     float:left;
+    width:25%;
+    text-align:center;
 
 }
 
