@@ -1,3 +1,8 @@
+body{
+    margin:0px;
+    padding:0px;
+}
+
 .container {
     margin:0px;
 }
@@ -158,6 +163,10 @@
     text-align: center;
     min-height: 2.5em;
 }
+
+.title.single_line{
+    line-height:2.5em;
+}
 .events_list {
    /* background-color: #FFF0F0; */
    font-weight:normal;
@@ -176,6 +185,11 @@
     color: #0035BD;
 }
 
+.events_list.bad a:hover{
+    background-color: #628FF3;
+    color: #FFFFFF;
+}
+
 .events_list a{
     margin-right:5px;
     margin-bottom: 4px;
@@ -185,6 +199,10 @@
     border-radius: 3px;
     font-size: 0.7em;
     display: inline-block;
+}
+.events_list a:hover{
+    background-color: #FF4141;
+    color: #FFFFFF;
 }
 
 .yi_container,
@@ -216,14 +234,14 @@
 
 .bottom_nav_toolbar{
      clear:both;
-     height: 1em;
+     height: 2.2em;
      background-color: #C40000;
-     padding-top: 0.5em;
-     padding-bottom: 0.5em;
-     /* margin-top: 10px; */
+     padding-top: 0.8em;
+     padding-bottom: 0.3em;
      color: white;
      font-weight: bold;
      font-size:1.2em;
+     margin-top: 1.2em;
 }
 
 .bottom_nav_toolbar ul{
@@ -235,9 +253,15 @@
 
 .bottom_nav_toolbar ul li{
     float:left;
-    width:25%;
+    width: 24%;
+    line-height: 1.8em;
     text-align:center;
+    vertical-align:middle;
+    border-right: 1px #FF3434 solid;
+}
 
+.bottom_nav_toolbar ul li:last-child{
+    border-right: 0px;
 }
 
 .bottom_nav_toolbar ul li a {

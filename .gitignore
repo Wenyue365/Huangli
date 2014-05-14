@@ -156,4 +156,13 @@ $RECYCLE.BIN/
 .DS_Store
 
 # Photoshop Files - Add by Jenseng
+PIC/
 *.psd
+
+# Design Document
+DSG/
+
+# Other Intermediate Files
+[Bb]in/
+*.dll
+*.pdb

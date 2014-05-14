@@ -245,11 +245,11 @@ color: transparent;
         </div>
         
         <div class="yi_container">
-            <div class="title">宜</div>
+            <div class="title single_line">宜</div>
             <div class="events_list"><span id="xYiEventsList" runat="server"></span></div>
         </div>
         <div class="ji_container">
-            <div class="title bad">忌</div>
+            <div class="title bad single_line">忌</div>
             <div class="events_list bad"><span id="xJiEventsList" runat="server"></span></div>
         </div>
         <div class="good_angel_yi">
@@ -265,14 +265,15 @@ color: transparent;
             <div class="events_list"><span id="xPengAvoidEventsList" runat="server"></span></div>
         </div>
         <div class="collide">
-            <div class="title">冲</div>
+            <div class="title single_line">冲</div>
             <div class="events_list"><span id="xCollideEventsList" runat="server"></span></div>
         </div>
         <div class="five_elem">
-            <div class="title">五行</div>
+            <div class="title single_line">五行</div>
             <div class="events_list"><span id="xFiveElemEventsList" runat="server"></span></div>
         </div>
     </div>
+    <!-- 底部导航栏 -->
     <div class="bottom_nav_toolbar" id="bottomNavToolbar">
         <ul>
             <li><a href="./Default.aspx">黄历</a></li>
@@ -363,16 +364,15 @@ color: transparent;
         </script>
 
 <script type="text/javascript">
-    //shortcut method
+    /*//shortcut method
     var $ = function (s) {
         return (typeof s == "object") ? s : document.getElementById(s);
     };
-
+    */
 </script>
 
 <script type="text/javascript">
     // 处理用户跳转到前一天或下一天
-
     function goNextDay(i) {
         var xSolarYear = $("xSolarYear");
         var xSolarMonth = $("xSolarMonth");
@@ -400,8 +400,6 @@ color: transparent;
             goNextDay(-1);
         }
     }
-    
-    // $("xSolarDateDiv").addEvent("onclick", onclick_solarDate);
 
     // 初始化当前日期按钮 
     function initCurrDate()
@@ -450,7 +448,6 @@ color: transparent;
         setEvents_OnClickHandler(dt.getFullYear(), dt.getMonth(), dt.getDate());
     }
 
-
     //根据时间初始化下拉框
     function initHLQuery() {
         var now = new Date();
@@ -476,8 +473,7 @@ color: transparent;
         }
     }
 
-    
-    //从Tencent拉取黄历数据
+    //[Abandoned]从Tencent拉取黄历数据
     function loadhlInfo() {
         var urlFID = 'http://cgi.data.astro.qq.com/astro/query.php?act=hl';
         urlFID += '&qyear=' + $("hlyear").value + '&qmonth=' + $("hlmonth").value + '&qday=' + $("hlday").value;
@@ -544,9 +540,50 @@ color: transparent;
         });
     }
    
+    // 浮动工具栏
+    var $smartFloat = function (elements) {
+        var position = function (element) {
+            var top = element.getPosition().y,
+            pos = element.getStyle("position");
+            window.addEvent("scroll",
+            function () {
+                var scrolls = this.getScroll().y;
+                if (scrolls > top) {
+                    if (window.XMLHttpRequest) {
+                        element.setStyles({
+                            position: "fixed",
+                            top: 0
+                        });
+                    } else {
+                        element.setStyles({
+                            top: scrolls
+                        });
+                    }
+                } else {
+                    element.setStyles({
+                        position: "absolute",
+                        top: top
+                    });
+                }
+            });
+        };
+
+        if ($type(elements) == "array") {
+            return elements.each(function (items) {
+                position(items);
+            });
+        } else if ($type(elements) == "element") {
+            position(elements);
+        }
+    };
+
+    //绑定 
+    $smartFloat($("bottomNavToolbar"));
+
+
     //初始化操作
     initCurrDate();
-    //initHLQuery();
+
    
 </script>
          

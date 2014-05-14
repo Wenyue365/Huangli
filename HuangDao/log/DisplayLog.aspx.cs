@@ -110,5 +110,23 @@ namespace HuangDao.log
 
             loadLogFile(dt);            
         }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            DateTime dt;
+
+            if (this.fieldCurrentDateTime.Value == null)
+            {
+                dt = DateTime.Now;
+            }
+            else
+            {
+                if (!DateTime.TryParse(fieldCurrentDateTime.Value, out dt))
+                {
+                    dt = DateTime.Now;
+                }
+            }
+            loadLogFile(dt);  
+        }
     }
 }

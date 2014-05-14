@@ -64,7 +64,6 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BadToDo.aspx" />
     <Content Include="BestToDo.aspx" />
     <Content Include="css\base.css" />
     <Content Include="css\default.css" />
@@ -89,13 +88,6 @@
     <Content Include="HuangdaoWS.asmx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BadToDo.aspx.cs">
-      <DependentUpon>BadToDo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BadToDo.aspx.designer.cs">
-      <DependentUpon>BadToDo.aspx</DependentUpon>
-    </Compile>
     <Compile Include="BestToDo.aspx.cs">
       <DependentUpon>BestToDo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

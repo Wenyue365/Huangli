@@ -112,6 +112,7 @@ namespace HuangDao
             {
                 jsn_yi_dates = db.getHlYiDates(start_date, end_date, yi_word);
 
+                db.Close();
             }
 
             return jsn_yi_dates;
@@ -125,6 +126,7 @@ namespace HuangDao
              if (db != null)
              {
                  jsn_lunar = db.getLunarDate(year, month, day);
+                 db.Close();
              }
 
             return jsn_lunar;
@@ -138,7 +140,7 @@ namespace HuangDao
             if (db != null)
             {
                 hld = db.getSinaHlInfo(year, month, day);
-
+                db.Close();
             }
 
             return hld;

@@ -4,11 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script src="jslib/mootools-core-1.4.5.js"></script>
     <title></title>
+    <style type="text/css">
+        #bottomNavToolbar{
+            background-color:red;
+            height:2em;
+        }
+
+    </style>
 </head>
 <body>
     <div id="divOutput"></div>
     <input type="button" value="Test Mootools JS" onclick="onclick_Go()"/>
     <input type="button" value="getSinaHlInfo" onclick="onclick_Go_getSinaHlInfo()" />
+    <div id="bottomNavToolbar"></div>
 
     <script type="text/javascript">
         function onclick_Go(){
@@ -68,6 +76,47 @@
 
             request.send();
         }
+
+        // 浮动工具栏
+        var $smartFloat = function (elements) {
+            var position = function (element) {
+                var top = element.getPosition().y,
+                pos = element.getStyle("position");
+                window.addEvent("scroll",
+                function () {
+                    var scrolls = this.getScroll().y;
+                    if (scrolls > top) {
+                        if (window.XMLHttpRequest) {
+                            element.setStyles({
+                                position: "fixed",
+                                top: 500
+                            });
+                        } else {
+                            element.setStyles({
+                                top: scrolls
+                            });
+                        }
+                    } else {
+                        element.setStyles({
+                            position: "absolute",
+                            top: top+100
+                        });
+                    }
+                });
+            };
+
+            if (typeof (elements) == "array") {
+                return elements.each(function (items) {
+                    position(items);
+                });
+            } else if (typeof (elements) == "element") {
+                position(elements);
+            }
+        };
+
+        //绑定 
+        $smartFloat($("bottomNavToolbar"));
+
     </script>
 </body>
 

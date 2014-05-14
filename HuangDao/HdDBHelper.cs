@@ -31,13 +31,13 @@ namespace HuangDao
             initDb(); 
         }
 
-        ~HdDBHelper()
+        ~HdDBHelper() // Destructors cannot be called. They are invoked automatically
         {
             --ref_count;
 
             if (ref_count == 0)
             {
-                closeDb(); // Release the MySQL connection resource
+                Close(); // Release the MySQL connection resource
             }
         }
 
@@ -76,7 +76,7 @@ namespace HuangDao
 
             return result;
         }
-        private void closeDb()
+        public void Close()
         {
             if (m_connSql != null)
             {
@@ -95,7 +95,7 @@ namespace HuangDao
 
             MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
             cmdSql.CommandType = CommandType.Text;
-
+            cmdSql.CommandTimeout = 200;
 
             if (cmdSql.ExecuteNonQuery() == 1)
             {
