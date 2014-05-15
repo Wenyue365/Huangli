@@ -1,0 +1,95 @@
+body {
+}
+
+
+ul{
+  padding:0px;
+  margin:0px;
+  margin-bottom:0.3em;
+  display: inline-block;
+  list-style:none;
+}
+
+ul li span{
+  display:inline-block;
+}
+
+ul li div{
+  display:inline-block;
+}
+
+#TitleToolBar{
+ display:inline-block;
+ margin-bottom:10px;
+}
+
+#TitleToolBar div{
+    float:left;
+}
+
+.user_icon{
+    margin-right: 15px;
+    margin-left: 3px;
+
+}
+.user_info{
+  padding:3px;
+  font-weight:bold;
+  color: #CA0000;
+}
+.user_info :first-child{
+  margin-right:5px;
+  background: #8D398D;
+  color: white;
+  padding: 3px 5px 3px 5px;
+}
+.user_icon img{
+    width:50px;
+    height:50px;
+    background-color:#0094ff;
+    border:solid 1px #BE0000;
+}
+
+.user_detail{
+    clear:both;
+}
+
+.user_detail ul li span:first-child{
+  font-weight:bold;
+  background-color: #DB2B9C;
+  padding:0.4em;
+  color: white;
+}
+
+.user_detail ul li{
+  margin-bottom:5px;
+  margin-left:3px;
+}
+
+.friends{
+  float:left;
+  display: inline-block;
+}
+
+.friends_list{
+   display:inline-block;
+}
+
+.friends_list li{
+    float:left;
+}
+
+.friends_list_title {
+  display:inline-block;
+}
+
+#AdvertiseBar{
+  margin-left:3px;
+  padding: 8px 5px 5px 8px;
+  background-color: #EBBC01;
+  font-weight: bold;
+}
+
+#AdvertiseBar span{
+  color:white;
+}

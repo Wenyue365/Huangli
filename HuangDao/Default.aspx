@@ -567,7 +567,7 @@ color: transparent;
                 }
             });
         };
-
+/*
         if ($type(elements) == "array") {
             return elements.each(function (items) {
                 position(items);
@@ -575,6 +575,7 @@ color: transparent;
         } else if ($type(elements) == "element") {
             position(elements);
         }
+        */
     };
 
     //绑定 

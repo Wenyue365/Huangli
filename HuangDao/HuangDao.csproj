@@ -68,6 +68,7 @@
     <Content Include="css\base.css" />
     <Content Include="css\default.css" />
     <Content Include="Divine.aspx" />
+    <Content Include="css\divine.css" />
     <Content Include="jslib\calendar.js" />
     <Content Include="chooseDates.aspx" />
     <Content Include="css\chooseDates.css" />
