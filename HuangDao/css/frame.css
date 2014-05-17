@@ -1,0 +1,58 @@
+﻿
+.body_container{
+    margin:0px 0px 4em 0px;
+    display:inline-block;
+    width:100%;
+}
+
+.bottom_nav_toolbar {
+    clear: both;
+    background-color: #C20000;
+    padding-top: 0.3em;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    display: inline-block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.bottom_nav_toolbar ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    padding:0px;
+    margin:0px;
+    margin-bottom:0.1em;
+    display: inline-block;
+    list-style:none;
+    width: 100%;
+    }
+
+.bottom_nav_toolbar ul li {
+    float: left;
+    width: 24%;
+    line-height: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px #FF3434 solid;
+}
+
+.bottom_nav_toolbar ul li span{
+  display:inline-block;
+}
+
+.bottom_nav_toolbar ul li div{
+  display:inline-block;
+}
+
+.bottom_nav_toolbar ul li:last-child {
+    border-right: 0px;
+}
+
+.bottom_nav_toolbar ul li a {
+    text-decoration: none;
+    color: white;
+}
+

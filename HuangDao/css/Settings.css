@@ -1,5 +1,3 @@
-body {
-}
 
 
 ul{
@@ -8,6 +6,7 @@ ul{
   margin-bottom:0.3em;
   display: inline-block;
   list-style:none;
+  width: 100%;
 }
 
 ul li span{
@@ -39,7 +38,7 @@ ul li div{
 }
 .user_info :first-child{
   margin-right:5px;
-  background: #8D398D;
+  background: #FFD3FF;
   color: white;
   padding: 3px 5px 3px 5px;
 }
@@ -52,31 +51,50 @@ ul li div{
 
 .user_detail{
     clear:both;
+    margin-bottom:15px;
 }
 
 .user_detail ul li span:first-child{
   font-weight:bold;
   background-color: #DB2B9C;
   padding:0.4em;
+  margin-right:10px;
   color: white;
+}
+
+.user_detail ul li span.detail{
+  font-size:0.8em;
+  margin-right:0.5em;
+  color: grey;
 }
 
 .user_detail ul li{
   margin-bottom:5px;
   margin-left:3px;
+  background-color: #F0F0F0;
 }
 
 .friends{
   float:left;
-  display: inline-block;
+  display: flex;
 }
 
 .friends_list{
    display:inline-block;
 }
 
-.friends_list li{
+.friends_list ul{
+  margin:0px;
+  padding:0px;
+}
+
+.friends_list ul li{
     float:left;
+    width:auto;
+}
+
+.friends_list ul li span{
+  background-color: #7FD574 !important;
 }
 
 .friends_list_title {
@@ -86,10 +104,11 @@ ul li div{
 #AdvertiseBar{
   margin-left:3px;
   padding: 8px 5px 5px 8px;
-  background-color: #EBBC01;
+  background-color: #FFF1B8;
   font-weight: bold;
 }
 
 #AdvertiseBar span{
-  color:white;
+  color: #F89500;
 }
+

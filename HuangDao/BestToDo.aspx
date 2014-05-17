@@ -9,9 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta content="width=device-width,user-scalable=no" name="viewport" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <script src="calendar.js"></script>
-    <link href="./huangli.css" rel="stylesheet" />
-    <script src="jslib/mootools-core-1.4.5-full-nocompat-yc.js"></script>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/frame.css" rel="stylesheet" />
+    <link href="css/BestToDo.css" rel="stylesheet" />
+
     <title>宜</title>
 </head>
 <body>
@@ -133,25 +135,23 @@
             </script>
             <!--结束：黄历名词解释 -->
 
-           <!--开始：日历控件-->
-            <style type="text/css">
-                #CalBody {
-                    width: 168px;
-                    margin-top: 12px;
-                }
-            </style>
-            <div id="CalBody">
-                <script type="text/javascript">InitCalendar();</script>    
-                </div>
-            <!-- 结束：日历控件 -->
-
             </div>
     </form>
 
+    <!-- START: 底部导航栏 -->
+    <div class="bottom_nav_toolbar" id="bottomNavToolbar">
+        <ul>
+            <li><a href="./Default.aspx">黄历</a></li>
+            <li><a href="./BestTodo.aspx">宜忌</a></li>
+            <li><a href="./Divine.aspx">测算</a></li>
+            <li><a href="./Settings.aspx">设置</a></li>
+        </ul>
+    </div>
+    <!-- END: 底部导航栏 -->
     <script type="text/javascript">
         //本页需要的js基础函数
         //Browser check
-        /*var Browser = new Object();*/
+        var Browser = new Object();
 
         Browser.ua = window.navigator.userAgent.toLowerCase();
         Browser.ie = /msie/.test(Browser.ua);
@@ -246,7 +246,7 @@
                                 var oSpan = document.createElement("span");
                                 oSpan.innerHTML = arrYi[i];
                                 oSpan.onclick = onclick_word;
-                                oKeywords.appendChild(oSpan);
+                                oKeywords.add(oSpan);
                             }
 
                         } else {

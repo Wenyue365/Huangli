@@ -1,19 +1,8 @@
-body{
-    margin:0px;
-    padding:0px;
-}
-
-.container {
-    margin:0px;
-}
-.container div {
-    border-width: 0px;
-}
-
 .calender_panel{
     height:180px;
     overflow: hidden;
 }
+
 .solar_year_month {
     Height: 1.4em;
     font-size: 1.4em;
@@ -231,45 +220,6 @@ body{
     font-weight: bold;
     
 }
-
-.bottom_nav_toolbar{
-     clear:both;
-     background-color: #C20000;
-     padding-top: 0.5em;
-     padding-bottom: 0.3em;
-     color: white;
-     font-weight: bold;
-     font-size: 1.2em;
-     margin-top: 1em;
-     display: inline-block;
-     width: 100%;
-}
-
-.bottom_nav_toolbar ul{
-    list-style:none;
-    margin:0px;
-    padding:0px;
-
-}
-
-.bottom_nav_toolbar ul li{
-    float:left;
-    width: 24%;
-    line-height: 1.8em;
-    text-align:center;
-    vertical-align:middle;
-    border-right: 1px #FF3434 solid;
-}
-
-.bottom_nav_toolbar ul li:last-child{
-    border-right: 0px;
-}
-
-.bottom_nav_toolbar ul li a {
-   text-decoration:none;
-   color:white;
-}
-
 
 #keywords_yi {
     clear: both;

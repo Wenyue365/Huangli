@@ -66,7 +66,10 @@
   <ItemGroup>
     <Content Include="BestToDo.aspx" />
     <Content Include="css\base.css" />
+    <Content Include="css\BestToDo.css" />
     <Content Include="css\default.css" />
+    <Content Include="css\frame.css" />
+    <Content Include="css\Settings.css" />
     <Content Include="Divine.aspx" />
     <Content Include="css\divine.css" />
     <Content Include="jslib\calendar.js" />
@@ -80,9 +83,12 @@
     <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery.mobile-1.1.2.css" />
+    <Content Include="Scripts\jquery.mobile-1.1.2.js" />
     <Content Include="Settings.aspx" />
     <Content Include="TestJS.html" />
-    <Content Include="TestMootoolJs.html" />
+    <Content Include="TestJQFooter.html" />
+    <Content Include="TestSimpleFooter.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

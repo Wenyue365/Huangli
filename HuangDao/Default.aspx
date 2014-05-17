@@ -10,9 +10,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>黄道吉日</title>
     <script type="text/javascript" name="baidu-tc-cerfication" src="http://apps.bdimg.com/cloudaapi/lightapp.js#49864d04284941d7c34281555b923388"></script><script type="text/javascript">window.bd && bd._qdc && bd._qdc.init({ app_id: '55224d2be49bce6da1435b51' });</script>
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/frame.css" rel="stylesheet" />
     <link href="./css/huangli.css" rel="stylesheet" />
     <link href="./css/default.css" rel="stylesheet" />
-    <script src="jslib/mootools-core-1.4.5-full-nocompat-yc.js"></script>
+    <script type="text/javascript" src="jslib/mootools-core-1.4.5-full-nocompat-yc.js"></script>
     <style type="text/css">
 
     .cls_solardate{
@@ -21,22 +23,22 @@
     margin-bottom:3px;
     line-height:1em;
 	color:#f99478;
-}
+    }
 
-.cls_solardate select {
-	color:#f99478;
-	border-color:#f99478;
-    border-width:1px;
-	padding-left:3px;
-}
+    .cls_solardate select {
+	    color:#f99478;
+	    border-color:#f99478;
+        border-width:1px;
+	    padding-left:3px;
+    }
 
-.cls_lunardate{
-	clear:both;
-    padding-left: 3px;
-    margin-bottom:3px;
-    line-height:1em;
-	color:#f99478;
-}
+    .cls_lunardate{
+	    clear:both;
+        padding-left: 3px;
+        margin-bottom:3px;
+        line-height:1em;
+	    color:#f99478;
+    }
 
 .cls_lunardate span{
 	display:inline-block;
@@ -117,6 +119,7 @@ background-repeat: no-repeat;
 background-color: transparent;
 color: transparent;
 }
+
 #btn_rightarrow{
 background-image: url("./images/hd_pics.png");
 background-position: -97px 0px;
@@ -124,6 +127,7 @@ background-repeat: no-repeat;
 background-color: transparent;
 color: transparent;
 }
+
 #lkbtn_solardate{
     border-radius:8px;
     padding-left:12px;
@@ -213,9 +217,7 @@ color: transparent;
            }
 </script>
 
-    <form id="form1" runat="server">
-    </form>
-    <div class="container">
+    <div class="body_container">
         <div class="calender_panel">
             <div class="solar_calender">
                 <!-- 公历年月日 -->
@@ -363,7 +365,7 @@ color: transparent;
         }
         </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     /*//shortcut method
     var $ = function (s) {
         return (typeof s == "object") ? s : document.getElementById(s);
@@ -371,140 +373,153 @@ color: transparent;
     */
 </script>
 
-<script type="text/javascript">
-    // 处理用户跳转到前一天或下一天
-    function goNextDay(i) {
-        var xSolarYear = $("xSolarYear");
-        var xSolarMonth = $("xSolarMonth");
-        var xSolarDate = $("xSolarDate");
+    <script type="text/javascript">
+        // 处理用户跳转到前一天或下一天
+        function goNextDay(i) {
+            var xSolarYear = $("xSolarYear");
+            var xSolarMonth = $("xSolarMonth");
+            var xSolarDate = $("xSolarDate");
 
-        var y = parseInt(xSolarYear.innerHTML, 10);
-        var m = parseInt(xSolarMonth.innerHTML, 10);
-        var d = parseInt(xSolarDate.innerHTML, 10);
-        var nextDay = d + i;
+            var y = parseInt(xSolarYear.innerHTML, 10);
+            var m = parseInt(xSolarMonth.innerHTML, 10);
+            var d = parseInt(xSolarDate.innerHTML, 10);
+            var nextDay = d + i;
 
-        initSolarDate(y, m, nextDay);
+            initSolarDate(y, m, nextDay);
 
-        getSinaHlInfo(y, m, nextDay);
-    }
-    function onclick_solarDate(event) {
-        var x = event.pageX - $('xSolarDateDiv').offsetLeft;
-        var y = event.pageY - $('xSolarDateDiv').offsetTop;
-        var Area = $("xSolarDateDiv");
-        if (x > Area.offsetWidth / 2) {
-            // mouse click on right area
-            goNextDay(1);
+            getSinaHlInfo(y, m, nextDay);
         }
-        else if (x < Area.offsetWidth / 2) {
-            // mouse click on left area
-            goNextDay(-1);
+        function onclick_solarDate(event) {
+            var x = event.pageX - $('xSolarDateDiv').offsetLeft;
+            var y = event.pageY - $('xSolarDateDiv').offsetTop;
+            var Area = $("xSolarDateDiv");
+            if (x > Area.offsetWidth / 2) {
+                // mouse click on right area
+                goNextDay(1);
+            }
+            else if (x < Area.offsetWidth / 2) {
+                // mouse click on left area
+                goNextDay(-1);
+            }
         }
-    }
 
-    // 初始化当前日期按钮 
-    function initCurrDate()
-    {
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var date = now.getDate();
-        var week_day = now.getDay();
+        // 初始化当前日期按钮 
+        function initCurrDate()
+        {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var date = now.getDate();
+            var week_day = now.getDay();
 
-        var xSolarDate = $("xSolarDate");
-        xSolarDate.innerHTML = date;
-        xSolarDate.onclick = function () { }
+            var xSolarDate = $("xSolarDate");
+            xSolarDate.innerHTML = date;
+            xSolarDate.onclick = function () { }
 
-        var xSolarYear = $("xSolarYear");
-        xSolarYear.innerHTML = year;
+            var xSolarYear = $("xSolarYear");
+            xSolarYear.innerHTML = year;
 
-        var xSolarMonth = $("xSolarMonth");
-        xSolarMonth.innerHTML = month;
+            var xSolarMonth = $("xSolarMonth");
+            xSolarMonth.innerHTML = month;
 
-        var arrWeekdays = ["日","一","二","三","四","五","六"];
-        var xWeekday = $("xWeekday");
-        xWeekday.innerHTML = arrWeekdays[week_day];
+            var arrWeekdays = ["日","一","二","三","四","五","六"];
+            var xWeekday = $("xWeekday");
+            xWeekday.innerHTML = arrWeekdays[week_day];
 
-        setEvents_OnClickHandler(year, month, date);
-    }
-
-    // 设置当前的公历时间
-    function initSolarDate(y, m, d)
-    {
-        var dt = new Date(y, m-1, d);
-
-        var xSolarYear = $("xSolarYear");
-        xSolarYear.innerHTML = dt.getFullYear();
-
-        var xSolarMonth = $("xSolarMonth");
-        xSolarMonth.innerHTML = dt.getMonth()+1;
-
-        var xSolarDate = $("xSolarDate");
-        xSolarDate.innerHTML = dt.getDate();
-
-        var arrWeekdays = ["日","一", "二", "三", "四", "五", "六"];
-        var xWeekday = $("xWeekday");
-        xWeekday.innerHTML = arrWeekdays[dt.getDay()];
-
-        setEvents_OnClickHandler(dt.getFullYear(), dt.getMonth(), dt.getDate());
-    }
-
-    //根据时间初始化下拉框
-    function initHLQuery() {
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-
-        //年
-        var hl_year = $("hlyear");
-        //目前是在2006-2010范围内
-        if (year >= 2006 && year <= 2014) {
-            hl_year.value = year;
+            setEvents_OnClickHandler(year, month, date);
         }
-        //月
-        var hl_month = $("hlmonth");
-        if (month >= 1 && month <= 12) {
-            hl_month.value = month;
+
+        // 设置当前的公历时间
+        function initSolarDate(y, m, d)
+        {
+            var dt = new Date(y, m-1, d);
+
+            var xSolarYear = $("xSolarYear");
+            xSolarYear.innerHTML = dt.getFullYear();
+
+            var xSolarMonth = $("xSolarMonth");
+            xSolarMonth.innerHTML = dt.getMonth()+1;
+
+            var xSolarDate = $("xSolarDate");
+            xSolarDate.innerHTML = dt.getDate();
+
+            var arrWeekdays = ["日","一", "二", "三", "四", "五", "六"];
+            var xWeekday = $("xWeekday");
+            xWeekday.innerHTML = arrWeekdays[dt.getDay()];
+
+            setEvents_OnClickHandler(dt.getFullYear(), dt.getMonth(), dt.getDate());
         }
-        //日
-        var hl_day = $("hlday");
-        if (day >= 1 && day <= 31) {
-            hl_day.value = day;
+
+        //根据时间初始化下拉框
+        function initHLQuery() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+
+            //年
+            var hl_year = $("hlyear");
+            //目前是在2006-2010范围内
+            if (year >= 2006 && year <= 2014) {
+                hl_year.value = year;
+            }
+            //月
+            var hl_month = $("hlmonth");
+            if (month >= 1 && month <= 12) {
+                hl_month.value = month;
+            }
+            //日
+            var hl_day = $("hlday");
+            if (day >= 1 && day <= 31) {
+                hl_day.value = day;
+            }
         }
-    }
 
-    //[Abandoned]从Tencent拉取黄历数据
-    function loadhlInfo() {
-        var urlFID = 'http://cgi.data.astro.qq.com/astro/query.php?act=hl';
-        urlFID += '&qyear=' + $("hlyear").value + '&qmonth=' + $("hlmonth").value + '&qday=' + $("hlday").value;
+        //[Abandoned]从Tencent拉取黄历数据
+        function loadhlInfo() {
+            var urlFID = 'http://cgi.data.astro.qq.com/astro/query.php?act=hl';
+            urlFID += '&qyear=' + $("hlyear").value + '&qmonth=' + $("hlmonth").value + '&qday=' + $("hlday").value;
 
-        JsLoader.load(urlFID, function () {
-            //拿到FID
-            if (typeof hlJsonFID != "undefined" && hlJsonFID != "") {
-                var urlJson = 'http://data.astro.qq.com/hl/' + Math.floor(hlJsonFID / 1000) + "/" + hlJsonFID + "/info.js";
+            JsLoader.load(urlFID, function () {
+                //拿到FID
+                if (typeof hlJsonFID != "undefined" && hlJsonFID != "") {
+                    var urlJson = 'http://data.astro.qq.com/hl/' + Math.floor(hlJsonFID / 1000) + "/" + hlJsonFID + "/info.js";
 
-                // 请求黄历详情数据
-                JsLoader.load(urlJson, function () {
-                    if (typeof hlInfo != "undefined") {
-                        var showtime =  hlInfo["F1"] + "-" + hlInfo["F2"] + "-" + hlInfo["F3"];
-                        // 农历日期数据展示
-                        var arrLunarDates = hlInfo["F4"].split(" ");
-                        var lunar_date = arrLunarDates[0];
-                        var lunar_date_ac = arrLunarDates[2];
+                    // 请求黄历详情数据
+                    JsLoader.load(urlJson, function () {
+                        if (typeof hlInfo != "undefined") {
+                            var showtime =  hlInfo["F1"] + "-" + hlInfo["F2"] + "-" + hlInfo["F3"];
+                            // 农历日期数据展示
+                            var arrLunarDates = hlInfo["F4"].split(" ");
+                            var lunar_date = arrLunarDates[0];
+                            var lunar_date_ac = arrLunarDates[2];
 
-                        $("hlNongLi").title = lunar_date;
-                        $("hlNongLi").innerHTML = lunar_date;
+                            $("hlNongLi").title = lunar_date;
+                            $("hlNongLi").innerHTML = lunar_date;
 
-                        $("hlNongLi_AC").title = lunar_date_ac;
-                        $("hlNongLi_AC").innerHTML = lunar_date_ac;
+                            $("hlNongLi_AC").title = lunar_date_ac;
+                            $("hlNongLi_AC").innerHTML = lunar_date_ac;
 
-                        $("xLunarDate").innerHTML = lunar_date;
+                            $("xLunarDate").innerHTML = lunar_date;
 
-                        //宜、忌 加起来为3行，优先显示 “宜” 最多2行
+                            //宜、忌 加起来为3行，优先显示 “宜” 最多2行
 
-                            var oKeywords = $("keywords_yi");
+                                var oKeywords = $("keywords_yi");
+                                var arrYi = new Array();
+                                var strYi = hlInfo["F6"];
+                                arrYi = strYi.split(" ");
+
+                                for (var i = 0; i < arrYi.length; i++) {
+                                    var oSpan = document.createElement("span");
+                                    oSpan.innerHTML = arrYi[i];
+                                    oSpan.onclick = function onclick_word() { window.location = "chooseDates.aspx?hlw=" + this.innerHTML + "&" + "hlm=" + showtime; };
+                                    oKeywords.appendChild(oSpan);
+                                }
+
+                            //处理 忌
+                            var oKeywords = $("keywords_ji");
                             var arrYi = new Array();
-                            var strYi = hlInfo["F6"];
+                            var strYi = hlInfo["F7"];
                             arrYi = strYi.split(" ");
 
                             for (var i = 0; i < arrYi.length; i++) {
@@ -513,80 +528,67 @@ color: transparent;
                                 oSpan.onclick = function onclick_word() { window.location = "chooseDates.aspx?hlw=" + this.innerHTML + "&" + "hlm=" + showtime; };
                                 oKeywords.appendChild(oSpan);
                             }
-
-                        //处理 忌
-                        var oKeywords = $("keywords_ji");
-                        var arrYi = new Array();
-                        var strYi = hlInfo["F7"];
-                        arrYi = strYi.split(" ");
-
-                        for (var i = 0; i < arrYi.length; i++) {
-                            var oSpan = document.createElement("span");
-                            oSpan.innerHTML = arrYi[i];
-                            oSpan.onclick = function onclick_word() { window.location = "chooseDates.aspx?hlw=" + this.innerHTML + "&" + "hlm=" + showtime; };
-                            oKeywords.appendChild(oSpan);
-                        }
                       
                         
-                    } else {
-                        alert("暂无该数据，稍后填充，请随时关注最新运势。");
-                    }
+                        } else {
+                            alert("暂无该数据，稍后填充，请随时关注最新运势。");
+                        }
 
-                }); //结束：请求黄历详情数据
+                    }); //结束：请求黄历详情数据
 
-            } else {
-                alert("暂无该数据，稍后填充，请随时关注最新运势。");
-            }
-        });
-    }
-   
-    // 浮动工具栏
-    var $smartFloat = function (elements) {
-        var position = function (element) {
-            var top = element.getPosition().y,
-            pos = element.getStyle("position");
-            window.addEvent("scroll",
-            function () {
-                var scrolls = this.getScroll().y;
-                if (scrolls > top) {
-                    if (window.XMLHttpRequest) {
-                        element.setStyles({
-                            position: "fixed",
-                            top: 0
-                        });
-                    } else {
-                        element.setStyles({
-                            top: scrolls
-                        });
-                    }
                 } else {
-                    element.setStyles({
-                        position: "absolute",
-                        top: top
-                    });
+                    alert("暂无该数据，稍后填充，请随时关注最新运势。");
                 }
             });
-        };
-/*
-        if ($type(elements) == "array") {
-            return elements.each(function (items) {
-                position(items);
-            });
-        } else if ($type(elements) == "element") {
-            position(elements);
         }
-        */
-    };
+   
+        // 浮动工具栏
+        var $smartFloat = function (elements) {
+            var position = function (element) {
+                var top = element.getPosition().y,
+                pos = element.getStyle("position");
+                window.addEvent("scroll",
+                function () {
+                    var scrolls = this.getScroll().y;
+                    if (scrolls > top) {
+                        if (window.XMLHttpRequest) {
+                            element.setStyles({
+                                position: "fixed",
+                                top: 0
+                            });
+                        } else {
+                            element.setStyles({
+                                top: scrolls
+                            });
+                        }
+                    } else {
+                        element.setStyles({
+                            position: "absolute",
+                            top: top
+                        });
+                    }
+                });
+            };
+    /*
+            if ($type(elements) == "array") {
+                return elements.each(function (items) {
+                    position(items);
+                });
+            } else if ($type(elements) == "element") {
+                position(elements);
+            }
+            */
+        };
 
-    //绑定 
-    $smartFloat($("bottomNavToolbar"));
+        //绑定 
+        $smartFloat($("bottomNavToolbar"));
 
 
-    //初始化操作
-    initCurrDate();
+        //初始化操作
+        initCurrDate();
 
    
-</script>
+    </script>
          
 </body>
 </html>

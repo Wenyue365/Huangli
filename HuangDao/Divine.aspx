@@ -8,11 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="width=device-width,user-scalable=no" name="viewport" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/frame.css" rel="stylesheet" />
 <link href="css/divine.css" rel="stylesheet" />
 
     <title>测算</title>
 </head>
 <body>
+    <div class="body_container">
     <form id="form1" runat="server">
     <div>
     <div id="TitleToolBar">
@@ -66,7 +69,20 @@
         <div id="AdvertiseBar">
             <span>广告</span>
         </div>
-    </div>
     </form>
+
+    </div>
+    </div>
+
+        <!--START : Footer -->
+            <div class="bottom_nav_toolbar" id="bottomNavToolbar">
+            <ul>
+                <li><a href="./Default.aspx">黄历</a></li>
+                <li><a href="./BestTodo.aspx">宜忌</a></li>
+                <li><a href="./Divine.aspx">测算</a></li>
+                <li><a href="./Settings.aspx">设置</a></li>
+            </ul>
+        </div>
+    <!--END : Footer -->
 </body>
 </html>
