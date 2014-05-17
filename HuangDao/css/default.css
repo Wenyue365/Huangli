@@ -5,15 +5,17 @@
 
 .solar_year_month {
     Height: 1.4em;
+    line-height: 1.4em;
     font-size: 1.4em;
     font-weight: bold;
     padding: 6px;
     text-align: center;
-    color: #B10063;
+    color: #FFFFFF;
 }
+
 .solar_calender {
     float: left;
-    background-color: #F8C8EE;
+    background-color: #C20000;
     width: 40%;
 }
 .solar_date {
@@ -57,13 +59,13 @@
     Height: 30px;
     font-size: 1em;
     font-weight: bold;
-    color: #780088;
+    color: #FFFFFF;
     padding: 10px;
     text-align: center;
 }
 .ancient_ymdt {
     margin-left: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
     /* background-color: #FFF; */
 }
 .ancient_ymdt div {
@@ -112,14 +114,31 @@
 }
 .yi_time,.ji_time{
     clear: both;
-    padding: 7px 0px 5px 10px;
-    
-    margin-top: 5px;
-    background-color: #FAE3AB;
+    font-weight:normal;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    background-color: #FFE9B5;
+}
+
+.yi_time span:first-child{
+    font-weight:bold;
+    background-color: #FF9191;
+    color:white;
+    padding:3px 3px 2px 3px;
+    margin-right: 5px;
+    display:inline-block;
+}
+
+.ji_time span:first-child{
+    font-weight:bold;
+    background-color: #AEB4F8;
+    color:white;
+    padding:3px 3px 2px 3px;
+    margin-right: 5px;
+    display:inline-block;
 }
 
 .ancient_yiji{
-    margin-top: 8px;
     font-size: 0.8em;
     font-weight:bold;
     color: #A77201;
@@ -132,11 +151,12 @@
  
 }
 .lunar_month_day {
-    padding: 10px 3px 2px 10px;
+    padding: 6px 6px 6px 8px;
+    margin-bottom: 8px;
     background-color: #FFF7D8;
     clear: both;
-    
     font-size: 1.4em;
+    line-height: 1.4em;
     font-weight: bold;
     color: #D50000;
     height: 1.4em;
@@ -219,6 +239,10 @@
     font-size: 1.2em;
     font-weight: bold;
     
+}
+
+.bottom_nav_toolbar ul li {
+    padding-bottom:6px;
 }
 
 #keywords_yi {

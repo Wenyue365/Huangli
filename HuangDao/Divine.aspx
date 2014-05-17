@@ -16,8 +16,9 @@
 </head>
 <body>
     <div class="body_container">
+    <div class="container">
     <form id="form1" runat="server">
-    <div>
+    
     <div id="TitleToolBar">
             <div id="divUserIcon" class="user_icon"><img src="./images/user_default_male.png" /></div>
             <div id="divUserInfo" class="user_info"><span>生辰</span><span>2000年3月3日</span></div>
@@ -56,14 +57,7 @@
                     <div class="title bad"><span>忌</span></div>
                     <div class="events_list"><span></span></div>
                 </li>
-                <li>
-                    <div class="title"><span>宜</span></div>
-                    <div class="events_list"><span></span></div>
-                </li>
-                <li>
-                    <div class="title bad"><span>忌</span></div>
-                    <div class="events_list"><span></span></div>
-                </li>
+
             </ul>
         </div>
         <div id="AdvertiseBar">

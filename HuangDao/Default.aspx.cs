@@ -38,6 +38,9 @@ namespace HuangDao
 
             xAcientTime.InnerText  = hdSvcs.getShiChengInfo(DateTime.Now.Hour);
 
+            xYiTime.InnerText = "见贵 求财 嫁娶 认养 移徙";
+            xJiTime.InnerText = "赴任 出行";
+
         }
         private void CreateEventsListCtrls(HtmlControl parentCtrl, string strEvents)
         {

@@ -240,8 +240,8 @@ color: transparent;
                         <div class="ancient_time"><span id="xAcientTime" runat="server"></span></div>
                     </div></div>
                 <div class="ancient_yiji">
-                    <div class="yi_time"><span id="xYiTime" runat="server"></span>时宜</div>
-                    <div class="ji_time"><span id="xJiTime" runat="server"></span>时忌</div>
+                    <div class="yi_time"><span>时宜</span><span id="xYiTime" runat="server"></span></div>
+                    <div class="ji_time"><span>时忌</span><span id="xJiTime" runat="server"></span></div>
                 </div>
             </div>
         </div>
