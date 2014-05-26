@@ -16,6 +16,7 @@
 <body>
     <form id="form1" runat="server">
     <div class="body_container">
+        <div class="container">
         <div id="TitleToolBar">
             <div id="divUserIcon" class="user_icon"><img src="./images/user_default_male.png" /></div>
             <div id="divUserInfo" class="user_info"><span>生辰</span><span>2000年3月3日</span></div>
@@ -53,6 +54,7 @@
             <span>广告</span>
         </div>
     </div>
+        </div>
     </form>
     <!--START : Footer -->
             <div class="bottom_nav_toolbar" id="bottomNavToolbar">

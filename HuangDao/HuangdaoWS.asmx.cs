@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Net;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Xml.Serialization;
 
 namespace HuangDao
 {
@@ -144,6 +145,28 @@ namespace HuangDao
             }
 
             return hld;
+        }
+
+        [WebMethod]
+        public LaoHLHour getLaoHLHour(int year, int month, int day, int hour)
+        {
+            LaoHLHour hlHour = null;
+            HdDBHelper db = new HdDBHelper();
+            if (db != null)
+            {
+                hlHour = db.getLaoHLHour(year, month, day, hour);
+                db.Close();
+            }
+
+            /*string strXML = null;
+            XmlSerializer xmlSerializer = new XmlSerializer(hlHour.GetType());
+            StringWriter textWriter = new StringWriter();
+            xmlSerializer.Serialize(textWriter, hlHour);
+            strXML = textWriter.ToString();
+
+            return strXML;*/
+
+            return hlHour;
         }
     }
 }

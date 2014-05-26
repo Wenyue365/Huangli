@@ -38,9 +38,36 @@ namespace HuangDao
 
             xAcientTime.InnerText  = hdSvcs.getShiChengInfo(DateTime.Now.Hour);
 
-            xYiTime.InnerText = "见贵 求财 嫁娶 认养 移徙";
-            xJiTime.InnerText = "赴任 出行";
+            xYiTime.InnerText = getYiTime(hdSvcs, td);
+            xJiTime.InnerText = getJiTime(hdSvcs, td);
 
+        }
+
+        private string getJiTime(HDWebservices hdSvcs, DateTime curr_dt)
+        {
+            string strJiEvents = null;
+
+            LaoHLHour lhHour = hdSvcs.getLaoHLHour(curr_dt.Year, curr_dt.Month, curr_dt.Day, curr_dt.Hour);
+
+            if (lhHour != null)
+            { 
+                strJiEvents = lhHour.m_bad_timed;
+            }
+            return strJiEvents;
+        }
+
+        private string getYiTime(HDWebservices hdSvcs, DateTime curr_dt)
+        {
+            string strYiEvents = null;
+
+            LaoHLHour lhHour = hdSvcs.getLaoHLHour(curr_dt.Year, curr_dt.Month, curr_dt.Day, curr_dt.Hour);
+
+            if (lhHour != null)
+            {
+                strYiEvents = lhHour.m_well_timed;
+            }
+
+            return strYiEvents;
         }
         private void CreateEventsListCtrls(HtmlControl parentCtrl, string strEvents)
         {

@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="HdDBHelper.cs" />
     <Compile Include="HtmlParser.cs" />
+    <Compile Include="LaoHLBook.cs" />
     <Compile Include="log\DisplayLog.aspx.cs">
       <DependentUpon>DisplayLog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

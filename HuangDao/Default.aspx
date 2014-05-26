@@ -286,6 +286,42 @@ color: transparent;
     </div>
 
     <script type="text/javascript">
+        /*函数：从WY 服务器获取LoaHuangLi 的时辰宜忌信息*/
+        function getLaoHLHourInfo(y, m, d, h) {
+            var baseUrl = location.href;
+            var i = baseUrl.lastIndexOf("/");
+            baseUrl = baseUrl.substr(0, i);
+            baseUrl = baseUrl + "/HuangdaoWS.asmx/getLaoHLHour";
+
+            // 定义事件处理函数：请求数据成功
+            var onSuccess_Handler = function (responseText) {
+                var obj = JSON.decode(responseText);
+                // 初始化页面元素的数据
+                if (obj != null) {
+                    var hld = obj.d;
+                    $("xYiTime").innerHTML = hld.m_well_timed;
+                    $("xJiTime").innerHTML = hld.m_bad_timed;
+                }
+            }
+
+            // 定义事件处理函数：请求数据失败
+            var onFailure_Handler = function () { /* 不做任何处理 */  };
+            // 定义事件处理函数：请求数据完成
+            var onCompleted_Handler = function () { /* 不做任何处理 */};
+
+            var request = new Request({
+                url: baseUrl,
+                method: "post",
+                data: JSON.encode({ year: y, month: m, day: d, hour:h}), /*输入：Webservice 方法的参数*/
+                headers: { "Content-Type": "application/json; charset=utf8" },
+                onSuccess: onSuccess_Handler,
+                onFailure: onFailure_Handler,
+                onComplete: onCompleted_Handler
+            });
+
+            request.send();
+        }
+
         /* 函数：从WY服务器获取SINA黄历信息 */
         function getSinaHlInfo(y, m, d) {
             var baseUrl = location.href;
@@ -309,9 +345,6 @@ color: transparent;
                     CreateEventsListCtrls($("xEvilAngelJiEventsList"),hld.m_evilAngelJi.Value);
                     CreateEventsListCtrls($("xYiEventsList"),hld.m_Yi.Value);
                     CreateEventsListCtrls($("xJiEventsList"),hld.m_Ji.Value);
-                    // hld.m_birthGod.Value
-                    // hld.m_solarDate.Value
-                    // hld.m_zodiac.Value
                 }
             }
 
@@ -385,9 +418,14 @@ color: transparent;
             var d = parseInt(xSolarDate.innerHTML, 10);
             var nextDay = d + i;
 
-            initSolarDate(y, m, nextDay);
-
+            // 1: load data from server
             getSinaHlInfo(y, m, nextDay);
+
+            var curr_date = new Date();
+            getLaoHLHourInfo(y, m, nextDay, curr_date.getHours());
+
+            // 2: initialize page elements
+            initSolarDate(y, m, nextDay);
         }
         function onclick_solarDate(event) {
             var x = event.pageX - $('xSolarDateDiv').offsetLeft;
@@ -447,7 +485,7 @@ color: transparent;
             var xWeekday = $("xWeekday");
             xWeekday.innerHTML = arrWeekdays[dt.getDay()];
 
-            setEvents_OnClickHandler(dt.getFullYear(), dt.getMonth(), dt.getDate());
+            setEvents_OnClickHandler(dt.getFullYear(), dt.getMonth()+1, dt.getDate());
         }
 
         //根据时间初始化下拉框
@@ -474,8 +512,7 @@ color: transparent;
                 hl_day.value = day;
             }
         }
-
-        //[Abandoned]从Tencent拉取黄历数据
+        /* [Abandoned] BEGIN: 从Tencent拉取黄历数据
         function loadhlInfo() {
             var urlFID = 'http://cgi.data.astro.qq.com/astro/query.php?act=hl';
             urlFID += '&qyear=' + $("hlyear").value + '&qmonth=' + $("hlmonth").value + '&qday=' + $("hlday").value;
@@ -541,49 +578,7 @@ color: transparent;
                 }
             });
         }
-   
-        // 浮动工具栏
-        var $smartFloat = function (elements) {
-            var position = function (element) {
-                var top = element.getPosition().y,
-                pos = element.getStyle("position");
-                window.addEvent("scroll",
-                function () {
-                    var scrolls = this.getScroll().y;
-                    if (scrolls > top) {
-                        if (window.XMLHttpRequest) {
-                            element.setStyles({
-                                position: "fixed",
-                                top: 0
-                            });
-                        } else {
-                            element.setStyles({
-                                top: scrolls
-                            });
-                        }
-                    } else {
-                        element.setStyles({
-                            position: "absolute",
-                            top: top
-                        });
-                    }
-                });
-            };
-    /*
-            if ($type(elements) == "array") {
-                return elements.each(function (items) {
-                    position(items);
-                });
-            } else if ($type(elements) == "element") {
-                position(elements);
-            }
-            */
-        };
-
-        //绑定 
-        $smartFloat($("bottomNavToolbar"));
-
-
+        [Abandoned] END: 从Tencent拉取黄历数据*/
         //初始化操作
         initCurrDate();
 
