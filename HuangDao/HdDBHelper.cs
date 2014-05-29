@@ -150,7 +150,6 @@ namespace HuangDao
 
         public string getHlYiDates(DateTime start_date, DateTime end_date, string yi_word)
         {
-
             string jsn_yiDates = null;
 
             try

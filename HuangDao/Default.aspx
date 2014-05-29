@@ -286,6 +286,16 @@ color: transparent;
     </div>
 
     <script type="text/javascript">
+        /*工具函数：截取指定长度的字附串*/
+        function trimString(str, len)
+        {
+            if (str != null && str.length > len)
+            {
+                str = str.substr(0, len);
+                // str = str + "...";
+            }
+            return str;
+        }
         /*函数：从WY 服务器获取LoaHuangLi 的时辰宜忌信息*/
         function getLaoHLHourInfo(y, m, d, h) {
             var baseUrl = location.href;
@@ -299,8 +309,8 @@ color: transparent;
                 // 初始化页面元素的数据
                 if (obj != null) {
                     var hld = obj.d;
-                    $("xYiTime").innerHTML = hld.m_well_timed;
-                    $("xJiTime").innerHTML = hld.m_bad_timed;
+                    $("xYiTime").innerHTML = trimString(hld.m_well_timed, 8);
+                    $("xJiTime").innerHTML = trimString(hld.m_bad_timed, 8);
                 }
             }
 

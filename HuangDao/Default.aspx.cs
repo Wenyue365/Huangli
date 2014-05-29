@@ -52,6 +52,12 @@ namespace HuangDao
             if (lhHour != null)
             { 
                 strJiEvents = lhHour.m_bad_timed;
+
+                if (lhHour.m_bad_timed.Length > 8)
+                {
+                    strJiEvents = strJiEvents.Substring(0, 8);
+                    //strJiEvents += "...";
+                }
             }
             return strJiEvents;
         }
@@ -65,8 +71,12 @@ namespace HuangDao
             if (lhHour != null)
             {
                 strYiEvents = lhHour.m_well_timed;
+                if (lhHour.m_well_timed.Length > 8)
+                {
+                    strYiEvents = strYiEvents.Substring(0, 8);
+                    //strYiEvents += "...";
+                }
             }
-
             return strYiEvents;
         }
         private void CreateEventsListCtrls(HtmlControl parentCtrl, string strEvents)

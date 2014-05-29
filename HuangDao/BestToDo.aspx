@@ -17,71 +17,39 @@
     <title>宜</title>
 </head>
 <body>
-     <style type="text/css">
-                #hlShowTime{
 
-                }
-                #keywords_yi {
-                    clear:both;
-                }
-                #keywords_yi span{
-                    background-color:#feecec;
-                    color:#ff0000;
-                    margin:4px 5px 4px 0px;
-                    padding:5px 5px 3px 5px;
-                    font-size:0.8em;
-                    font-weight:bold;
-                    display:block;
-                    float:left;
-                }
-                #btn_yi:hover {
-                    color: #000;
-                    background-color: #FF0;
-                }
-                #btn_yi {
-                    color: #FFF;
-                    background-color: #FF7474;
-                    font-size:1.5em;
-                    padding: 3px 5px;
-                    width:32px;
-                    height:32px;
-                }
-                #txbDetail{
-                    min-width:150px;
-                    min-height:50px;
-                    border:solid 1px;
-                    border-color:#FEECEC;
-                    padding:0.2em;
-                    font-size:0.8em;
-                    color:#FF7474;
-                }
-                #btnNextMonth{
-
-
-                }
-                .main_panel{
-                    margin:9px 9px;
-
-                }
-                .yi_title{
-                    margin-bottom:3px;
-                    height:50px;
-                }
-                .yi_title div{
-                    float:left;
-                }
-                .show_time{
-                    font-size:0.8em;
-                    margin-left:8px;
-                    padding:0.3em;
-                    color:red;
-                    background-color:#feecec;
-                }
-                .keyword_detail{
-                    clear:both;
-                }
-            </style>
     <form id="form1" runat="server">
+
+        <div class="body_container">
+            <div class="container">
+                <div id="TitleToolBar">
+                    <div id="divUserIcon" class="user_icon">
+                        <img src="./images/user_default_male.png" /></div>
+                    <div id="divUserInfo" class="user_info"><span>生辰</span><span>2000年3月3日</span></div>
+                </div>
+                <div id="divEventTypeBar" class="event_type_bar">
+                    <div><a>宜</a></div>
+                    <div><a>忌</a></div>
+                </div>
+                <div id="divYearBar" class="year_bar"><ul>
+                    <li><a>2013年</a></li>
+                    <li><a>2014年</a></li>
+                    <li><a>2015年</a></li>
+                 </ul></div>
+                <div id="divMonthBar" class="month_bar"><ul>
+                    <li><a><</a></li>
+                    <li><a>3月</a></li>
+                    <li><a>4月</a></li>
+                    <li><a>5月</a></li>
+                    <li><a>6月</a></li>
+                    <li><a>7月</a></li>
+                    <li><a>></a></li>
+                 </ul></div>
+
+                 <div id="ctl_calendar" runat="server"></div>
+            </div>
+        </div>
+
         <div class="main_panel">
         <div class="yi_title">
             <div id="btn_yi" onclick="onclick_Yi()" ><a href="#" >宜</a></div>
