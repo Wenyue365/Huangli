@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LoaHuangLi.LaoHLParser">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\My Documents\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoaHuangLi.EntryBase">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAAIAAAAAAAAAAAAAEAIAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>D:\My Documents\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoaHuangLi.Entry">
+    <Position X="3.5" Y="3.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="LoaHuangLi.Entry.ValueFormatter" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABEEAAQAAAEAAAwgAAAAAAAAABBgAAAAAAA=</HashCode>
+      <FileName>D:\My Documents\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoaHuangLi.PageBase">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>D:\My Documents\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoaHuangLi.Page">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQAAAAAEQAAAAAAAAAAAAAAgAAAAEAABACAAAIA=</HashCode>
+      <FileName>D:\My Documents\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoaHuangLi.CalcPage">
+    <Position X="0.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAgAAAAQAAAAAAAQAAQEAAAEAAAAAEAAAA=</HashCode>
+      <FileName>D:\My Documents\百度云\Project\LoaHuangLiLoader\LoaHuangLiLoader\LaoHLParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

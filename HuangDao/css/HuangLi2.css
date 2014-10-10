@@ -1,0 +1,301 @@
+.body_container{
+    margin:0px 0px 0px 0px;
+}
+
+.calender_panel{
+    /* background-color:#F7F4F2; */
+    /* overflow: hidden; */
+}
+
+.solar_year_month {
+    Height: 3em;
+    line-height: 4em;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 6px;
+    text-align: center;
+    color: black;
+    background-image:url("../images/top_pattern.png");
+    background-repeat:repeat-x;
+}
+
+.solar_calender {
+
+  /* background-color: #C20000; */
+
+}
+.solar_date {
+    font-size: 6em;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    padding: 0.2em 0em 0.1em 0em;
+}
+
+.solar_date :after , .solar_date :before  {
+    content:"";
+    overflow:hidden;
+    width: 8px;
+    height: 20px;
+    vertical-align:middle;
+    text-align:center;
+    height:0.5em;
+    left: 0.2em;
+    background-image: url("../images/Huangdao_pics.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+}
+
+.solar_date :after {
+    left: 5%;
+    background-position: -110px -14px;
+}
+
+.solar_date :before {
+    left: -5%;
+    background-position: -10px -14px;
+}
+
+.ancient_calender {
+    display: block;
+}
+
+.weekday {
+    Height: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding: 10px;
+    text-align: center;
+}
+
+.ancient_ymdt {
+    text-align:center;
+}
+.ancient_ymdt div {
+    /* display: inline-block; */
+    /* text-align: center; */
+    /* vertical-align:middle; */ /*very important attrribute*/
+}
+.img_div{
+    margin:6px;
+    display: inline-block;
+}
+.zodiac {
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+    text-align: center;
+    display: none;
+}
+
+.ancient_year_month, .ancient_day_time{
+    display: inline-block;
+}
+
+.ancient_year,
+.ancient_month ,
+.ancient_day,
+.ancient_time {
+    display: inline-block;
+    padding: 3px 3px 3px 3px;
+    margin: 2px 0px 3px 0px;
+    font-size: 1.5em;
+    font-weight: bold;
+    min-width: 3em;
+}
+
+.ancient_day,
+.ancient_time {
+    font-size:0.6em;
+    color:gray;
+    display: none;
+}
+
+.ancient_year{
+    float:left;
+}
+
+.ancient_day {
+   float:left;
+}
+.yi_time,.ji_time{
+    clear: both;
+    font-weight:normal;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    background-color: #FFE9B5;
+}
+
+.yi_time span:first-child{
+    font-weight:bold;
+    background-color: #FF9191;
+    color:white;
+    padding:3px 3px 2px 3px;
+    margin-right: 5px;
+    display:inline-block;
+}
+
+.ji_time span:first-child{
+    font-weight:bold;
+    background-color: #AEB4F8;
+    color:white;
+    padding:3px 3px 2px 3px;
+    margin-right: 5px;
+    display:inline-block;
+}
+
+.ancient_yiji{
+    display: none;
+    font-size: 0.8em;
+    font-weight:bold;
+    color: #A77201;
+}
+
+.ancient_yiji div {
+    /* margin-left: 10px; */
+    /* margin-bottom: 3px; */
+    /* padding: 3px; */
+ 
+}
+.lunar_month_day {
+    display: none;
+    padding: 6px 6px 6px 8px;
+    margin-bottom: 8px;
+    clear: both;
+    font-size: 1.4em;
+    line-height: 1.4em;
+    font-weight: bold;
+    color: #D50000;
+    height: 1.4em;
+}
+.title {
+    font-size:2em;
+    font-weight: bold;
+    color: green;
+    padding:4px 5px 3px 3px;
+    height: 2.3em;
+    width:2.3em;
+    text-align: center;
+    display: inline-block;
+}
+
+.title.single_line{
+    display: table-cell;
+    vertical-align: middle;
+}
+.events_list {
+   /* background-color: #FFF0F0; */
+   font-weight:normal;
+   display:table-cell;
+    vertical-align: middle;
+   padding: 8px 5px 3px 0px;
+}
+
+.title.bad{
+    color:#FF5A00;
+
+}
+
+.events_list.bad a{
+    color: #FF5A00;
+}
+
+.events_list.bad a:hover{
+    background-color: #628FF3;
+    color: #FFFFFF;
+}
+
+.events_list a{
+    margin-right:5px;
+    padding: 4px 5px 4px 5px;
+    color: green;
+    font-size: 0.8em;
+    border-radius: 2px;
+    display: inline-block;
+}
+.events_list a:hover{
+    background-color: #FF4141;
+    color: #FFFFFF;
+}
+
+.yi_container,
+.ji_container,
+.good_angel_yi,
+.bad_angel_ji,
+.peng_ji,
+.collide,
+.five_elem
+{
+
+    clear: both;
+}
+
+.yi_container,
+.ji_container,
+.good_angel_yi,
+.bad_angel_ji,
+.peng_ji,
+.collide,
+.five_elem,
+.dumy div{
+    padding: 0px 3px 5px 8px;
+    /* background-color: #F7F4F2; */
+    font-size: 1.2em;
+    font-weight: bold;       
+}
+
+.bottom_container{
+    height: 50px;
+}
+
+.bottom_nav_toolbar ul li {
+    padding-bottom:6px;
+}
+
+#keywords_yi {
+    clear: both;
+}
+
+#keywords_yi span {
+    background-color: #feecec;
+    color: #ff0000;
+    margin: 1px 4px 3px 0px;
+    padding: 8px 6px 6px 6px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    float: left;
+    line-height: 1em;
+}
+
+#keywords_yi span:hover {
+    background-color: #ff0000;
+    color: #feecec;
+}
+
+#keywords_ji {
+    clear: both;
+}
+
+#keywords_ji span {
+    background-color: #dee6ee;
+    color: #0051a2;
+    margin: 1px 4px 3px 0px;
+    padding: 8px 6px 6px 6px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    float: left;
+    line-height: 1em;
+}
+
+#keywords_ji span:hover {
+    background-color: #0051a2;
+    color: #dee6ee;
+}
+
+.content_list li {
+    clear: both;
+}

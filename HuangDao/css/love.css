@@ -1,0 +1,206 @@
+.body_container .container{
+    margin-left: 0px;
+    margin-top:0px;
+    background-image:url("../images/top_pattern.png");
+    background-repeat: repeat-x;
+}
+
+
+ul{
+  padding:0px;
+  margin:0px;
+  margin-bottom:0.3em;
+  display: inline-block;
+  list-style:none;
+}
+
+ul li span{
+  display:inline-block;
+}
+
+ul li div{
+  display:inline-block;
+}
+
+.divine_type_bar ul li{
+    list-style:none;
+    padding-top: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.5em;
+    margin-left: 0.2em;
+    float:left;
+    background-color: #FD9F97; 
+    color: #FFF;
+    font-weight: bold;
+}
+
+.selected_tab { 
+    background-color: #FF4A4A !important;
+}
+
+.divine_type_bar ul li:last-child{
+  background-color: rgba(253, 159, 151, 0.2);
+  color: #B80000;
+  font-weight: bold;
+}
+
+.divine_type_bar{
+    clear:both;
+    display: inline-block;
+    width:100%;
+}
+
+.title_bar_panel{
+ display:inline-block;
+ margin-bottom:35px;
+}
+
+.user_icon{
+    margin-right: 15px;
+    margin-left: 3px;
+    display:none;
+}
+
+.user_info{
+  padding:3px;
+  font-weight:bold;
+  color: #CA0000;
+  display:none;
+}
+.user_info :first-child{
+  margin-right:5px;
+  background: #8D398D;
+  color: white;
+  padding: 3px 5px 3px 5px;
+}
+.user_icon img{
+    width:50px;
+    height:50px;
+    background-color:#0094ff;
+    border:solid 1px #BE0000;
+}
+#divDivineInputBox{
+  clear:both;
+  display: table;
+  width:98%;
+
+
+}
+
+.div_input_panel{
+  margin:0px 0px 0px 2px;
+  padding: 40px 0px 0px 8px;
+
+}
+
+
+#divineResultList {
+  clear:left;
+  margin-left: 3px;
+  display: inline-block;
+}
+
+
+.title {
+    float: left;
+    margin-right:10px;
+    background-color: #FF9191;
+    padding: 5px 5px 3px 5px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    line-height: 2.2em;
+    text-align: center;
+    min-height: 2.5em;
+}
+
+.title.bad{
+    background-color: #AEB4F8;
+
+}
+
+#AdvertiseBar{
+  margin: 0px 6px 0px 3px;
+  padding: 8px 5px 5px 8px;
+  background-color: #FFF6D0;
+  font-weight: bold;
+  display: none
+}
+
+#AdvertiseBar span{
+  color:white;
+}
+
+.prompt_text{
+    color:#808080;
+    padding-left:3px;
+}
+
+.calc_result{
+  font-size:0.9em;
+  line-height:1.5em;
+  color: #B3470F;
+  padding: 8px 6px 0px 0px;
+}
+
+.calc_result ul {
+    margin:0px 8px 0px 8px;
+}
+
+.calc_result ul li {
+  /* background-color: #FFEA96; */
+  margin: 0px 0px 5px 0px;
+  padding:6px 0px 5px 0px;
+}
+
+.calc_result ul li span:first-child{
+  background-color: rgba(253, 159, 151, 0.2);
+  border-radius:3px;
+  padding: 3px 6px 2px 6px;
+}
+
+
+.calc_result ul li span:last-child{
+  padding:0px 3px 0px 6px;
+}
+
+.calc_result ul li span name{
+
+}
+
+.calc_result ul li span value{
+
+}
+
+.input_panel input{
+  line-height:1.4em;
+  padding: 0.4em 0em 0.3em 0.4em;
+  width:90%;
+}
+
+.input_panel .panel_man{
+  margin:0px 0px 3px 0px;
+
+}
+
+.input_panel .panel_woman{
+
+}
+
+.input_panel{
+  display:table-cell;
+  padding:0px 0px 0px 6px;
+}
+
+.button_panel{
+  vertical-align: middle;
+  display:table-cell;
+}
+
+.button_panel input{
+  display:inline-block;
+  padding:5px 12px 5px 12px;
+  height: 110%;
+}
