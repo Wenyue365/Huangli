@@ -31,6 +31,15 @@ namespace HuangDao {
         protected global::System.Web.UI.WebControls.Label lbWord;
         
         /// <summary>
+        /// lbDetail 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbDetail;
+        
+        /// <summary>
         /// solarMonth 控件。
         /// </summary>
         /// <remarks>
@@ -49,13 +58,13 @@ namespace HuangDao {
         protected global::System.Web.UI.WebControls.Label lunarMonth;
         
         /// <summary>
-        /// lbDetail 控件。
+        /// AncientDate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDetail;
+        protected global::System.Web.UI.WebControls.Label AncientDate;
         
         /// <summary>
         /// hl_dates 控件。

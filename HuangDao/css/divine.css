@@ -1,6 +1,8 @@
 .body_container .container{
-    margin-left:5px;
-    margin-top:8px;
+    margin-left: 5px;
+    margin-top:0px;
+    background-image:url("../images/top_pattern.png");
+    background-repeat: repeat-x;
 }
 
 
@@ -28,13 +30,17 @@ ul li div{
     padding-bottom: 0.5em;
     margin-left: 0.2em;
     float:left;
-    background-color: #FF4A4A; 
+    background-color: #FD9F97; 
     color: #FFF;
     font-weight: bold;
 }
 
+.selected_tab { 
+    background-color: #FF4A4A !important;
+}
+
 .divine_type_bar ul li:last-child{
-  background-color: #D6D3D3;
+  background-color: rgba(253, 159, 151, 0.2);
   color: #B80000;
   font-weight: bold;
 }
@@ -45,24 +51,21 @@ ul li div{
     width:100%;
 }
 
-#TitleToolBar{
+.title_bar_panel{
  display:inline-block;
- margin-bottom:10px;
-}
-
-#TitleToolBar div{
-    float:left;
+ margin-bottom:35px;
 }
 
 .user_icon{
     margin-right: 15px;
     margin-left: 3px;
-
+    display:none;
 }
 .user_info{
   padding:3px;
   font-weight:bold;
   color: #CA0000;
+  display:none;
 }
 .user_info :first-child{
   margin-right:5px;
@@ -78,34 +81,35 @@ ul li div{
 }
 #divDivineInputBox{
   clear:both;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 5px;
-}
+  display: table;
+  width:98%;
 
-#divDivineInputBox div{
-  float:left;
-  margin-left:3px;
-  display:inline-block;
+  margin:0px 0px 0px 2px;
 }
 
 .input_box{
-  width:60%;
-  margin-right: 8px;
+  vertical-align: middle;
+  display: table-cell;
+
+}
+
+.button_box{
+  vertical-align: middle;
+
+  display:table-cell;
 }
 
 .input_box input{
-  width:100%;
+  width:92%;
   height:2em;
-  padding-left:5px;
-}
-.button_box{
-  width:30%;
+  font-size:0.9em;
+  display:inline-block;
+  padding:0px 6px 0px 6px;
 }
 
 .button_box input{
+  display:inline-block;
   padding:5px;
-  height: 100%;
 }
 
 #divineResultList {
@@ -135,12 +139,79 @@ ul li div{
 }
 
 #AdvertiseBar{
-  margin-left:3px;
+  margin: 0px 6px 0px 3px;
   padding: 8px 5px 5px 8px;
-  background-color: #EBBC01;
+  background-color: #FFF6D0;
   font-weight: bold;
+  display: none
 }
 
 #AdvertiseBar span{
   color:white;
+}
+
+.prompt_text{
+    color:#808080;
+    padding-left:3px;
+}
+
+.calc_result{
+  font-size:0.9em;
+  line-height:1.5em;
+  color: #B3470F;
+  padding: 8px 6px 0px 0px;
+}
+
+.calc_result ul {
+    /* background-color: #FFF2C0; */
+}
+
+.calc_result ul li {
+  /* background-color: #FFEA96; */
+  margin: 0px 0px 5px 0px;
+  padding:6px 0px 5px 0px;
+}
+
+.calc_result ul li span:first-child{
+  background-color: rgba(253, 159, 151, 0.2);
+  border-radius:3px;
+  padding: 3px 0px 2px 0px;
+}
+
+
+.calc_result ul li span:last-child{
+  padding:0px 3px 0px 6px;
+}
+
+.calc_result ul li span name{
+
+}
+
+.calc_result ul li span value{
+
+}
+
+#coupleInfoPanel{
+  
+}
+
+#coupleInfoPanel ul{
+  
+}
+
+#coupleInfoPanel ul li{
+  float:left; 
+}
+
+#coupleInfoPanel div{
+  clear:both;
+  padding:5px 3px 0px 3px;
+}
+
+#coupleInfoPanel .panel_man{
+  background-color: #AABEFF;
+}
+
+#coupleInfoPanel .panel_woman{
+  background-color: #FD9F97;
 }

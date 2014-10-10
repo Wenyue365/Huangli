@@ -11,20 +11,19 @@
     color: white;
     font-weight: bold;
     font-size: 1.2em;
-    display: inline-block;
     width: 100%;
     position: fixed;
     bottom: 0;
     z-index:500;
+    background-image: url("../images/bottom.png");
+    background-repeat:repeat;
+    height: 45px;
 }
 
 .bottom_nav_toolbar ul {
     list-style: none;
     margin: 0px;
     padding: 0px;
-    padding:0px;
-    margin:0px;
-    margin-bottom:0.1em;
     display: inline-block;
     list-style:none;
     width: 100%;
@@ -33,10 +32,10 @@
 .bottom_nav_toolbar ul li {
     float: left;
     width: 24%;
-    line-height: 1.5em;
+    line-height: 2.2em;
     text-align: center;
     vertical-align: middle;
-    border-right: 1px #FF3434 solid;
+    border-right: 1px #845336 solid;
 }
 
 .bottom_nav_toolbar ul li span{

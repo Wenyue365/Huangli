@@ -8,40 +8,51 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace HuangDao
 {
     public class HdDBHelper
     {
-        const string db_host = "admin.yun03.yhosts.com";
-        const int db_port = 3306;
-        const string db_name = "wenyue365";
-        const string db_user = "wenyue365";
-        const string db_pass = "wenyue365$$$";
-        const string db_charset = "utf8"; // this value is query from the DB
+        static  string db_host = "admin.yun03.yhosts.com";
+        static  int db_port = 3306;
+        static  string db_name = "wenyue365";
+        static  string db_user = "wenyue365";
+        static  string db_pass = "wenyue365$$$";
+        static  string db_charset = "utf8"; // this value is query from the DB
 
-        static int ref_count = 0;
-        static string m_connString = null;
-        static MySqlConnection m_connSql = null;
+        static int m_openedCount = 0;
+        string m_connString = null;
+        MySqlConnection m_connSql = null;
+
+        public MySqlConnection ConnSql
+        {
+            get {
+                initDb();
+                return m_connSql;
+            }
+        }
+
+        static string s_logfilename;
+        static string s_data_path;
 
         public HdDBHelper()
         {
-            ref_count++;
+            s_logfilename = string.Format("db_log_{0}.log", DateTime.Now.ToLongDateString());
+            s_data_path = HttpContext.Current.Server.MapPath("~/log/" + s_logfilename);
 
             initDb(); 
         }
 
         ~HdDBHelper() // Destructors cannot be called. They are invoked automatically
         {
-            --ref_count;
-
-            if (ref_count == 0)
-            {
-                Close(); // Release the MySQL connection resource
-            }
+            closeDB(); // Release the MySQL connection resource
         }
 
-        string connStringBuilder(string host, int port, string dbname, string username, string password, string charset)
+        public static string getConnectionStr(){
+            return connStringBuilder(db_host, db_port, db_name, db_user, db_pass, db_charset);
+        }
+        public static string connStringBuilder(string host, int port, string dbname, string username, string password, string charset)
         {
             string cs = string.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};CharacterSet={5};Pooling=True;",
                 host, port, dbname, username, password, charset);
@@ -58,32 +69,39 @@ namespace HuangDao
                     m_connSql = new MySqlConnection(m_connString);
 
                     m_connSql.Open();
+                    m_openedCount++;
 
-                    Writelog("Open MySQL DB connection successfully.");
+                    Writelog(string.Format("Open MySQL DB ({0}) connection successfully.", m_openedCount));
                 }
                 else if (m_connSql.State != ConnectionState.Open)// Re-Open the DB connection when it is not OPEN
                 {
                     m_connSql.Open();
+                    m_openedCount++;
+
+                    Writelog(string.Format("Open MySQL DB ({0}) connection successfully.[ConnectionState.Open]", m_openedCount));
                 }
             }
             catch (MySqlException e)
             {
                 result = false;
+
                 m_connSql = null;
 
-                Writelog(e.Message);
+                Writelog("initDb : " + e.Message);
             }
 
             return result;
         }
-        public void Close()
+
+        public void closeDB()
         {
             if (m_connSql != null)
             {
                 m_connSql.Close();
                 m_connSql = null;
 
-                Writelog("Closed MySQL DB connection successfully.");
+                m_openedCount--;
+                Writelog(string.Format("Closed MySQL DB ({0}) connection successfully.", m_openedCount));
             }
         }
         public bool saveToDb(TXHuangDaoDay hdd)
@@ -93,7 +111,7 @@ namespace HuangDao
             string cmdText = string.Format("INSERT INTO wy_huangli(fid, showtime, lunerdate, goodtodo, badtodo) VALUES(\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\')",
                              hdd.FID, hdd.ShowTime, hdd.LunerDate, hdd.GoodToDo, hdd.BadToDo);
 
-            MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+            MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
             cmdSql.CommandType = CommandType.Text;
             cmdSql.CommandTimeout = 200;
 
@@ -105,16 +123,79 @@ namespace HuangDao
             return result;
         }
 
+        // 线程工作函数：保存用户访问信息到数据库
+        // This thread procedure performs the task.
+        static void thprocSaveIPLocation(Object stateInfo)
+        {
+            UserInfo ui = (UserInfo)stateInfo;
+
+            string cmdText = string.Format("INSERT INTO wy_userlog(userid, username, ip, loc, lastUpdateTime) VALUES ('{0}','{1}','{2}','{3}','{4}')",
+                           ui.id, ui.name, ui.ip, ui.loc, DateTime.Now);
+
+            string connString = null;
+            MySqlConnection connSql = null;
+
+            try
+            {
+                // 打开数据库连接
+                connString = connStringBuilder(db_host, db_port, db_name, db_user, db_pass, db_charset);
+                connSql = new MySqlConnection(connString);
+                connSql.Open();
+                Writelog("thprocSaveIPLocation : Open MySQL DB connection successfully.");
+
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, connSql);
+                cmdSql.CommandType = CommandType.Text;
+                cmdSql.CommandTimeout = 200;
+
+                if (cmdSql.ExecuteNonQuery() != 1)
+                {
+                    Writelog("Error : thprocSaveIPLocation - cmdSql.ExecuteNonQuery()");
+                }
+
+                connSql.Close();
+            }
+            catch (MySqlException e)
+            {
+                Writelog("thprocSaveIPLocation： MySqlException : " + e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 函数：采用异步方式保存用户访问信息（日志）
+        /// </summary>
+        /// <param name="id">用户ID，缺省为 0</param>
+        /// <param name="username">用户名， 缺省为 Visitor</param>
+        /// <param name="ip">用户发起访问的源IP 地址</param>
+        /// <param name="loc">IP 地址的归属地</param>
+        /// <returns></returns>
+        public bool saveToDbAsync(int id, string username, string ip, string loc)
+        {
+            bool result = false;
+
+            // 初始化工作函数的参数
+            UserInfo ui = new UserInfo();
+            ui.id   = id;
+            ui.name = username;
+            ui.ip   = ip;
+            ui.loc  = loc;
+
+            // 使用 ThreadPool 完成异步保存操作
+            if (ThreadPool.QueueUserWorkItem(new WaitCallback(thprocSaveIPLocation), ui))
+            {
+                result = true;
+            }
+            return result;
+        }
+
         public TXHuangDaoDay selectHlData(string where_clause)
         {
-
             TXHuangDaoDay hdd = null;
 
             try
             {
                 // Get record count
                 string cmdText = "SELECT count(*) FROM wy_huangli " + where_clause;
-                MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
                 cmdSql.CommandType = CommandType.Text;
 
                 int row_count = (int)cmdSql.ExecuteScalar();
@@ -156,7 +237,7 @@ namespace HuangDao
             {
                 string cmdText = string.Format("SELECT * FROM `wy_huangli`WHERE showtime > DATE_FORMAT( '{0}', '%Y/%c/%e' )  AND showtime < DATE_FORMAT( '{1}', '%Y/%c/%e' )  AND goodtodo LIKE '%{2}%'",
                     start_date.ToShortDateString(), end_date.ToShortDateString(), yi_word);
-                MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
                 cmdSql.CommandType = CommandType.Text;
 
                 MySqlDataReader sqlReader = cmdSql.ExecuteReader();
@@ -172,7 +253,6 @@ namespace HuangDao
                 jsn_yiDates += "]}";
 
                 sqlReader.Close();
-
             }
             catch (MySqlException ex)
             {
@@ -184,7 +264,7 @@ namespace HuangDao
 
         public string getLunarDate(int year, int month, int day)
         {
-            string jsn_lunar = null;
+            string strLunar = null;
 
             DateTime solarDate = new DateTime(year, month, day);
 
@@ -192,30 +272,26 @@ namespace HuangDao
             {
                 string cmdText = string.Format("SELECT * FROM `wy_huangli`WHERE DATE_FORMAT(showtime, '%Y/%c/%e' ) = DATE_FORMAT( '{0}', '%Y/%c/%e' )",
                     solarDate);
-                MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
                 cmdSql.CommandType = CommandType.Text;
 
+               
                 MySqlDataReader sqlReader = cmdSql.ExecuteReader();
-                jsn_lunar = "{[";
-                string s = "";
-                for (int i = 0; sqlReader.Read(); i++)
-                {
-                    s = sqlReader.GetString("lunerdate");
-                    jsn_lunar += s + ",";
-                }
 
-                jsn_lunar = jsn_lunar.TrimEnd(',');
-                jsn_lunar += "]}";
+                if (sqlReader.Read())
+                {
+                    strLunar = sqlReader.GetString("lunerdate");
+                }
 
                 sqlReader.Close();
 
             }
             catch (MySqlException ex)
             {
-                jsn_lunar = null;
+                strLunar = null;
             }
 
-            return jsn_lunar;
+            return strLunar;
         }
 
         public SinaHLDayEx getSinaHlInfo(int year, int month, int day)
@@ -225,9 +301,10 @@ namespace HuangDao
 
             try
             {
-                string cmdText = string.Format("SELECT * FROM `wy_sinahuangli`WHERE DATE_FORMAT(solarDate, '%Y/%c/%e' ) = DATE_FORMAT( '{0}', '%Y/%c/%e' )",
+                string cmdText = string.Format("SELECT * FROM wy_sinahuangli WHERE DATE_FORMAT(solarDate, '%Y/%c/%e' ) = DATE_FORMAT( '{0}', '%Y/%c/%e' )",
                     solarDate);
-                MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
                 cmdSql.CommandType = CommandType.Text;
 
                 MySqlDataReader sqlReader = cmdSql.ExecuteReader();
@@ -259,20 +336,17 @@ namespace HuangDao
             {
                 hld = null;
                 
-                Writelog(ex.Message);
+                Writelog("getSinaHlInfo : " + ex.Message);
             }
 
             return hld;
         }
 
-        static void Writelog(string log_str)
+        public static void Writelog(string log_str)
         {
-            string logfilename = string.Format("db_log_{0}.log",DateTime.Now.ToLongDateString());
-            string data_path = HttpContext.Current.Server.MapPath("~/log/" + logfilename);
-
             try
             {
-                FileStream fs = new FileStream(data_path, FileMode.OpenOrCreate|FileMode.Append);
+                FileStream fs = new FileStream(s_data_path, FileMode.OpenOrCreate | FileMode.Append);
                 if (fs != null)
                 {
                     TextWriter tr = new StreamWriter(fs, Encoding.UTF8);
@@ -283,9 +357,9 @@ namespace HuangDao
                     fs.Close();
                 }
             }
-            catch(IOException ie)
+            catch (IOException ie)
             {
-                Debug.Write(ie.Message);    
+                Debug.Write(ie.Message);
             }
         }
 
@@ -319,7 +393,7 @@ namespace HuangDao
                     lhlday.m_happy_god[i].Value,
                     lhlday.m_fortune_god[i].Value);
 
-                MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
                 cmdSql.CommandType = CommandType.Text;
 
                 if (cmdSql.ExecuteNonQuery() == 1)
@@ -347,7 +421,7 @@ namespace HuangDao
                     "WHERE STR_TO_DATE(curr_date, '%Y年%c月%e日') = DATE_FORMAT('{0}', '%Y-%m-%d') " +
                     ") tb " +
                     "WHERE (st <= tt AND et >= tt) OR (tt <= st and tt >= et)", currDate);
-                MySqlCommand cmdSql = new MySqlCommand(cmdText, m_connSql);
+                MySqlCommand cmdSql = new MySqlCommand(cmdText, ConnSql);
                 cmdSql.CommandType = CommandType.Text;
 
                 MySqlDataReader sqlReader = cmdSql.ExecuteReader();
@@ -380,7 +454,7 @@ namespace HuangDao
             {
                 hlHour = null;
 
-                Writelog(ex.Message);
+                Writelog("getLaoHLHour : " + ex.Message);
             }
 
             return hlHour;

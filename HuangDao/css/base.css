@@ -1,6 +1,10 @@
-﻿body {
+body {
     margin: 0px;
     padding: 0px;
     font-size-adjust: none;
     font-stretch: normal;
+    background-image: url("../images/background_title.png");
+    background-repeat:repeat;
+    background-position: 0 25%;
+    
 }

@@ -1,16 +1,16 @@
 .body_container .container{
-    margin-left:5px;
-    margin-top:8px;
+    margin-left: 5px;
+    margin-top:0px;
+    background-image:url("../images/top_pattern.png");
+    background-repeat: repeat-x;
 }
 
 
 ul{
   padding:0px;
-  margin:0px;
-  margin-bottom:0.3em;
+  margin: 0px;
   display: inline-block;
   list-style:none;
-
 }
 
 ul li span{
@@ -21,74 +21,217 @@ ul li div{
   display:inline-block;
 }
 
-.year_bar{
-  clear:both;
+.year_month_spin_bar{
+  display:table;
+  width: 98%;
+  background-color: rgba(192, 143, 56, 0.5);
+  margin: 0px 6px 0 2px;
+}
+
+.year_bar {
+  background-color: rgba(255, 255, 255, 0.49);
+  display:table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.month_bar{
+  display:table-cell;
+  text-align: center;
 }
 
 .year_bar ul{
-  margin:8px 0px 2px 0px;
 }
 
 .year_bar ul li{
   float:left;
-  margin:0px 5px 0px 0px;
-  padding:3px 5px 2px 5px;
-  background-color:#c00000;
-  color:white;
+  margin: 0px 3px 0px 3px;
+  padding: 8px 3px 5px 3px;
+  /* background-color:#c00000; */
+  color: rgb(58, 58, 58);
   font-weight:bold;
 }
 
-
-.month_bar{
-    display:inline;
-}
-
 .month_bar ul{
-  width:100%;
 }
 
 .month_bar ul li{
   float:left;
-  background-color:#ffe;
-  padding:3px 5px 2px 5px;
-  margin-right: 3px;
-  width:10%;
+  padding: 8px 0px 5px 0px;
   text-align:center;
+  color: white;
+  font-weight: bold;
 }
 
-.month_bar ul li:hover{
-background-color:#ff0;
+.month_bar :hover{
+/*background-color:#ff0;*/
+}
+
+.left{
+    text-align: left;
+    width:25%;
+}
+
+.right{
+    text-align: right;
+    width:25%;
+}
+
+.left ul li{
+  padding-left:8px;
+  padding-right:5px;
+}
+
+.right ul li{
+  padding-right: 8px;
+  padding-left:5px;
+}
+
+.selected
+{
+    background-color: #F8EA98;
+    color: #BD0000;
+}
+
+.search_bar{
+  display:table;
+  width:98%;
+  margin:0px 0px 6px 2px;
+}
+
+.input_search_box{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.search_input_box{
+    height: 2em;
+    width:20em;
+    line-height: 2em;
+    font-size:1em;
+    padding:0px 3px 0px 8px;
+    border:1px solid gray;
+}
+
+.search_prompt_box{
+    position:absolute;
+    background-color: rgba(255, 255, 255, 1);
+    border:1px solid #eeeeee;
+    border-radius:0px;
+    z-index: 10000;
+    display:none;
+    padding:5px;
+}
+
+.search_prompt_box span{
+   display:inline-block;
+   background-color: #FFF388;
+   padding:5px 8px 4px 8px;
+   margin:2px;
+   border-radius:2px;
+} 
+
+.search_prompt_box span:hover{
+   background-color:yellow;
+}
+
+
+.inputbox_focus{
+    color:red;
+    background-color: #dddddd;
+}
+
+.inputbox_blur{
+    color:gray;
+    background-color: #eeeeee;
+}
+
+.event_type_bar {
+
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.event_type_bar div:hover
+{
+  background-color: yellow;
+  color: red;
+}
+
+.input_search_box input{
+    width: 100%;
+    color:#BD0000;
+    font-size:1em;
+    padding:3px 6px 3px 6px; 
+    height: 2em;  
+    border: 1px solid grey;
+
+}
+
+.search_btn.yi {
+  color:#f00;
+  background-color: #FFF3B3;
+}
+
+.search_btn.ji {
+  /*background-color: #FFABAB;*/
+  background-color: #D5D5D5;
+  color: gray;
+}
+
+.button_checked{
+  background-color:yellow !important;
+  color:red;
 }
 
 .event_type_bar div {
 float:left;
-background-color:#bbe;
-padding:5px 5px 4px 5px;
-margin-right:5px;
-font-size: 2em;
+padding: 4px 15px 3px 15px;
+margin: 3px 2px 4px 4px;
+font-size: 1em;
 font-weight:bold;
-line-height:1em;
-
+line-height: 1.5em;
+display:inline-block;
 }
 
-#TitleToolBar{
+
+.keyword_list{
+  clear:both;
+  display: block;
+  padding: 0px 0px 2px 0px;
+  margin: 2px;
+  display: none;
+}
+.keyword_list a{
+    text-decoration: none;
+    color: white;
+    display:block;
+    float:left;
+    background-color:#e88;
+    margin-right:3px;
+    padding:4px 5px 3px 5px;
+    border-radius: 3px;
+}
+
+.title_bar_panel{
  display:inline-block;
- margin-bottom:10px;
+ margin-bottom:30px;
 }
 
-#TitleToolBar div{
+.title_bar_panel div{
     float:left;
 }
 
 .user_icon{
     margin-right: 15px;
     margin-left: 3px;
-
+    display: none;
 }
 .user_info{
   padding:3px;
   font-weight:bold;
   color: #CA0000;
+    display: none;
 }
 .user_info :first-child{
   margin-right:5px;
@@ -104,68 +247,93 @@ line-height:1em;
 }
 
 
-
-#ctl_calendar {
-    margin-top: 10px;
-    clear: both;
-    min-width: 235px;
-    text-align: center;
-}
-
-    #ctl_calendar a {
-        text-align: center;
-        text-decoration: none;
-    
-        font-weight: bold;
-}
-
-.calendar_day {
-    display: inline-block;
-    height: 30px;
-    width: 11%;
-    background-color: #feecec;
-    padding: 11px 3px 3px 3px;
-    margin: 2px;
-    color: #FF4D4D;
-}
-
 .invalid_day
 {
-    visibility:hidden;
+    /*visibility:hidden;*/
+    /* background-color:#eeeeff; */
+    color: #A7A7A7 !important;
 }
 
-.selected_day
+.yi_day
 {
-    background-color: #F8EA98;
-    color: #BD0000;
+    background-color: #FFF3B3 !important;
+    color: red !important;
 }
 
-.selected_day:after{
+.ji_day
+{
+    background-color: #D5D5D5 !important;
+    color: rgb(65, 65, 65) !important;
+}
+
+.today{
+  background-image:url("../images/check_today.gif");
+  background-repeat:no-repeat;
+  background-position:1px 1px;
+}
+
+.yi_day:after{
     content:"宜";
-    font-size:0.3em;
+    font-size: 8pt;
     font-weight:normal;
     color: #F00;
     position:relative;
-    left: 20%;
-    top: 12px;
+    left:15px;
+    top: 15px;
+    text-align: right;
 }
 
+.ji_day:after{
+    content:"忌";
+    font-size: 8pt;
+    font-weight:normal;
+    color:gray;
+    position:relative;
+    left:15px;
+    top: 15px;
+    text-align: right;
+}
+
+.calendar {
+  clear: both;
+  display:table;
+  /*border-collapse: separate;*/
+  border-collapse:collapse;
+  border-spacing: 0px;  /* 使用此属性设置 table-cell 间距*/
+  width:98%;
+  margin:3px 0px 0px 2px;
+}
+ 
 .calendar_week {
-    height: 28px;
-    margin-bottom: 20px;
+    display: table-row; /* 等同于 tr */
 }
 
 .calendar_header {
-    display: inline-block;
-    height: 25px;
-    width: 11%;
+    display:table-cell; /* 等同于 td */
+    min-width:18px;
     background-color: #FF9090;
     color: white;
+    padding: 0.8em;
+    text-align: center;
+    text-decoration:none;
+    vertical-align:middle;
     font-weight: bold;
-    padding: 12px 3px 3px 3px;
-    margin: 2px;
+    border:1px solid  grey;
 }
 
+.calendar_day {
+    display:table-cell;
+    height: 35px;
+    min-width:18px;
+    padding: 3px;
+    text-align: left;
+    vertical-align: top;
+    text-decoration: none;
+    color:brown;
+    font-weight: bold;
+    border: 1px solid  rgb(175, 143, 114);
+}
+ 
 #hlShowTime {
 }
 
@@ -198,28 +366,22 @@ line-height:1em;
     height: 32px;
 }
 
-#txbDetail {
+.event_explain {
     min-width: 150px;
     min-height: 50px;
-    border: solid 1px;
-    border-color: #FEECEC;
-    padding: 0.2em;
-    font-size: 0.8em;
+    border: solid 0px #D1CDCD;
+    background-color: rgba(231, 214, 191, 0.28);
+    padding: 6px;
+    margin: 7px;
+    font-size: 1em;
     color: #FF7474;
 }
-
-#btnNextMonth {
-}
-
-.main_panel {
-    margin: 9px 9px;
-}
-
+ 
 .yi_title {
     margin-bottom: 3px;
     height: 50px;
 }
-
+ 
 .yi_title div {
     float: left;
 }

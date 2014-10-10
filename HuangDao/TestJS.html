@@ -4,6 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <script src="Scripts/jquery-1.7.1.js"></script>
+    <script src="Scripts/jquery.xml2json.js"></script>
+    <script src="jslib/city.js"></script>
     <title></title>
 </head>
 <body>
@@ -21,7 +23,36 @@
         <div>
             <span id="txtOutput"></span>
         </div>
+
+        <div>
+            <input type="text" id="txbNumber" value="108.32" />
+            <input type="button" id="convertNubmer" onclick="return onclick_ConverNubmer()" />
+        </div>
         <script type="text/javascript">
+
+            function FormatInt(num, len) {
+                var fmt = "000000000";
+                var strNum = num.toString();
+                if (strNum.length < len)
+                {
+                    strNum = fmt + strNum;
+                    strNum = strNum.substring(strNum.length - len);
+                }
+
+                return strNum;
+            }
+
+            function onclick_ConverNubmer()
+            {
+                var num = $("#txbNumber").val();
+                var result;
+                if (num != null)
+                {
+                    result = FormatNumber(num, 3);
+                    $("#txbNumber").val(result);
+                }
+            }
+
             function goNextDay(i) {
                 $("#txtOutput").text("mouse click on " + "(" + i + ")");
             }
@@ -50,9 +81,211 @@
     <div id='target'></div>
     <div>
         <input type="button" id="btnGo" value="Go Test" onclick="onclick_Go()" />
+        <input type="text" id="InputCarNumber" class="prompt_text" value="请输入车牌号码" title="请输入车牌号码" onfocus="onfocus_inputCtrl()" onblur="onblur_InputCtrl()" />
+        <input type="button" id="btnCalcCarNumber" value="Calc Car Number" onclick="onclick_CalcCarNumber()" />
+
+        <div id="divCalcResult">
+
+        </div>
+    </div>
+    <div id="coupleInfoPanel" class="couple_info_panel">
+        <div class="couple_info_panel_a">
+            <!--BEGIN: 地区选择 A -->
+            <div>
+                <select name="prov" id="s1" class="kw2">
+                    <option value="省份">省份</option>
+                </select> <select name="city" id="s2" class="kw2">
+                    <option value="地市">地市</option>
+                </select> <select name="county" id="s3" class="kw2">
+                    <option value="区县">区县</option>
+                </select>
+            </div>
+            <!--出生年月日时辰选择 A-->
+            <div>
+                <ul>
+                    <li>
+                        <select name="nian1" id="nian1" class="kw1"></select>
+                    </li>
+                    <li>
+                        <select name="yue1" id="yue1" class="kw1"></select>
+                    </li>
+                    <li>
+                        <select name="ri1" id="ri1" class="kw1"></select>
+                    </li>
+                    <li>
+                        <select name="shi1" id="shi1" class="kw1"></select>
+                    </li>
+                    <li>
+                        <select name="fen1" id="fen1" class="kw1"></select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="couple_info_panel_b">
+        <!--BEGIN: 地区选择 B -->
+        <div>
+            <select name=" prov2" id="s12" class="kw2">
+            <option value="省份">省份</option>
+            </select>
+            <select name="city2" id="s22" class="kw2">
+                <option value="地市">地市</option>
+            </select>
+            <select name="county2" id="s32" class="kw2">
+                <option value="区县">区县</option>
+            </select>
+        </div>
+        <!--出生年月日时辰选择 B-->
+        <div>
+            <ul>
+                <li>
+                    <select name="nian2" id="nian2" class="kw2"></select>
+                </li>
+                <li>
+                    <select name="yue2" id="yue2" class="kw2"></select>
+                </li>
+                <li>
+                    <select name="ri2" id="ri2" class="kw2"></select>
+                </li>
+                <li>
+                    <select name="shi2" id="shi2" class="kw2"></select>
+                </li>
+                <li>
+                    <select name="fen2" id="fen2" class="kw2"></select>
+                </li>
+            </ul>
+        </div>
+        </div>
     </div>
     <script type="text/javascript">
+    setup(); /* 初始化地区选择控件 */
 
+    /* 初始化日期时间控件 */
+    function initDateTimeCtrl(yearCtrl_id, monthCtrl_id, dayCtrl_id, hourCtrl_id, minCtrl_id) {
+        var startDate = new Date(1940, 1, 1, 0, 0, 0, 0);
+        var endDate = new Date(2020, 12, 31, 23, 59, 59, 999);
+
+        var yc = $(yearCtrl_id);
+        var mc = $(monthCtrl_id);
+        var dc = $(dayCtrl_id);
+        var hc = $(hourCtrl_id);
+        var nc = $(minCtrl_id);
+
+        // Year Control 
+        var year_span = endDate.getFullYear() - startDate.getFullYear();
+        var opn_array = new Array(year_span);
+        for(i=0; i<year_span; i++)
+        {
+            opn_array[i] = new Option(startDate.getFullYear() + i + "年", startDate.getFullYear() + i);
+            if (opn_array[i].value == 1989) opn_array[i].selected = true; // Set default selected value
+        }
+        yc.append(opn_array);
+
+        // Month Control
+        var month_span = 12;
+        var opn_array = new Array(month_span);
+        for (i = 0; i < month_span; i++)
+        {
+            opn_array[i] = new Option(i + 1 + "月", i + 1);
+            if (opn_array[i].value == 9) opn_array[i].selected = true; // Set default selected value
+        }
+        mc.append(opn_array);
+
+        // Day Control
+        var day_span = 31;
+        var opn_array = new Array(day_span);
+        for (i = 0; i < day_span; i++) {
+            opn_array[i] = new Option(i + 1 + "日", i + 1);
+            if (opn_array[i].value == 9) opn_array[i].selected = true; // Set default selected value
+        }
+        dc.append(opn_array);
+
+        // Hour Control
+        var hour_span = 24;
+        var opn_array = new Array(hour_span);
+        for (i = 0; i < hour_span; i++) {
+            opn_array[i] = new Option(i + "时", i);
+            if (opn_array[i].value == 9) opn_array[i].selected = true; // Set default selected value
+        }
+
+        hc.append(opn_array); // Note: the 'add' method can not work.
+
+        // Minute Control
+        var min_span = 60;
+        var opn_array = new Array(min_span);
+        for (i = 0; i < min_span; i++) {
+            opn_array[i] = new Option(i + "分", i);
+            if (opn_array[i].value == 9) opn_array[i].selected = true; // Set default selected value
+        }
+
+        nc.append(opn_array); // Note: the 'add' method can not work.
+    }
+
+    initDateTimeCtrl(nian1, yue1, ri1, shi1, fen1);
+    initDateTimeCtrl(nian2, yue2, ri2, shi2, fen2);
+
+    </script>
+
+    <style type="text/css">
+        .prompt_text{
+            color:#808080;
+            padding-left:3px;
+        }
+    </style>
+    <script type="text/javascript">
+        function onclick_CalcCarNumber()
+        {
+            if (InputCarNumber.value =="" || InputCarNumber.value == InputCarNumber.title)
+            {
+                InputCarNumber.focus();
+            }
+
+            var post_data = InputCarNumber.val();
+            function onSuccHandle(data) {
+                var divCalcResult = $("#divCalcResult");
+                var calcResult = $.xml2json(data);
+                var ulCalcResult = document.createElement("ul");
+                for (var i = 0; i < calcResult._Entries.EntryBase.length; i++)
+                {
+                    var liCalResult = document.createElement("li");
+                    var spanName = document.createElement("span");
+                    var spanValue = document.createElement("span");
+
+                    spanName.innerText = calcResult._Entries.EntryBase[i]._name;
+                    spanValue.innerText = calcResult._Entries.EntryBase[i]._value;
+
+                    liCalResult.appendChild(spanName);
+                    liCalResult.appendChild(spanValue);
+                    ulCalcResult.appendChild(liCalResult);
+                }
+
+                divCalcResult.append(ulCalcResult); // This a JQuery object !
+            }
+
+            $.ajax({
+                url: "/HuangdaoWS.asmx/calcCarNumber",
+                type: 'POST',
+                dataType: 'xml',
+                data: {carNum:post_data}, /* 设定carNum 的值 */
+                success: onSuccHandle
+            }); /* End of AJAX Request */           
+        }
+
+        function onfocus_inputCtrl()
+        {
+            InputCarNumber = $("#InputCarNumber");
+            if (InputCarNumber.val() == InputCarNumber.attr("title")) {
+                InputCarNumber.val(""); // Clear the value
+            }
+        }
+
+        function onblur_InputCtrl()
+        {
+            InputCarNumber = $("#InputCarNumber");
+            if (InputCarNumber.val()=="")
+            {
+                InputCarNumber.val(InputCarNumber.attr("title"));
+            }
+        }
 
         function onclick_Go(){
             $('target').innerHTML = "Hello world !";

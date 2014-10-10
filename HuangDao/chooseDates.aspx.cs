@@ -11,10 +11,13 @@ namespace HuangDao
 {
     public partial class chooseDates : System.Web.UI.Page
     {
+        string qs_word;
+        string qs_month;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string qs_word = Request.QueryString["hlw"];
-            string qs_month = Request.QueryString["hlm"];
+            qs_word = Request.QueryString["hlw"];
+            qs_month = Request.QueryString["hlm"];
 #if DEBUG
             //hl_word = "嫁娶";
 #endif
@@ -49,8 +52,21 @@ namespace HuangDao
                         DateTime cm = DateTime.Parse(qs_month);
                         if (cm != null)
                         {
-                            lunarMonth.Text = hdSvc.getLunarDate(cm.Year, cm.Month, cm.Day);
-                            lunarMonth.Text = lunarMonth.Text.Trim(trim_chars);
+                            string strText = hdSvc.getLunarDate(cm.Year, cm.Month, cm.Day);
+                            if (strText.Length > 0)
+                            {
+                                string[] arrText = strText.Split(' ');
+                                if (arrText.Length > 2)
+                                {
+                                    lunarMonth.Text = arrText[0].Trim(trim_chars);
+                                    AncientDate.Text = arrText[2].Trim(trim_chars);
+                                }
+                                else
+                                {
+                                    lunarMonth.Text = strText.Trim(trim_chars);
+                                    AncientDate.Visible = false; // set this element invisible, but it still occupy its place 
+                                }
+                            }
                         }
                     }
                     catch (FormatException fx)
@@ -70,84 +86,60 @@ namespace HuangDao
                 {
                     lbDetail.Visible = false;
                 }
-
-
            
-                // 开始： 显示候选日期
+                // 1. 查询指定时间段内候选日期
                 DateTime start_date = DateTime.Now;
                 DateTime end_date;
 
                 start_date = start_date.AddDays(1 - start_date.Day);
                 end_date = start_date.AddMonths(1);
 
-                                
                 string strDates = hdSvc.getHlYiDates(start_date, end_date, qs_word);
 
+                // 2. 将查询结果日期（字符串）转换为日期（整型）数组
                 strDates = strDates.Trim(trim_chars);
                 string[] arrDate = strDates.Split(',');
 
-                // hl_dates.Style.Add("display", "none");
-                /*
-                foreach (string d in arrDate)
+                int[] selectedDates = new int[arrDate.Length];
+
+                for (int i = 0; i < selectedDates.Length; i++)
                 {
-                    string st = "";
-
-                    try
+                    DateTime d;
+                    if (DateTime.TryParse(arrDate[i], out d))
                     {
-                        DateTime dt = DateTime.Parse(d);
-                        st = dt.ToLongDateString();
-                    }
-                    catch (FormatException fx)
-                    {
-                        st = d;
-                    }
-
-                    if (d != null)
-                    {
-                        Label lb = new Label();
-                        lb.Text = st;
-
-                        hl_dates.Controls.Add(lb);
-                    }
-
-                }
-                // 结束：显示候选日期
-*/
-
-                // 生成日历
-                try
-                {
-                    HtmlGenericControl parentNode = ctl_calendar;
-                    DateTime mn = DateTime.Parse(qs_month);
-
-                    int[] selectedDates = new int[arrDate.Length];
-                    for(int i=0; i < selectedDates.Length; i++)
-                    {
-                        DateTime d = DateTime.Parse(arrDate[i]);
                         selectedDates[i] = d.Day;
                     }
-
-
-                    GenerateCalendar(parentNode, mn, selectedDates);
                 }
-                catch (FormatException fx)
+
+                // 生成日历
+                DateTime mn;
+
+                if (!DateTime.TryParse(qs_month, out mn))
                 {
-                    // do nothing.
+                    mn = DateTime.Now;
                 }
+
+                HtmlGenericControl parentNode = ctl_calendar;
+                GenerateCalendar(parentNode, mn, selectedDates);
             }
             else
             {
-                Response.Redirect("/default.aspx");
+                Response.Redirect("/huangli.aspx");
             }
-
         }
-
+        
+        /// <summary>
+        /// 生成日历控件
+        /// </summary>
+        /// <param name="parentNode">日历控件的父节点</param>
+        /// <param name="mn">日历控件显示的日期（年月）</param>
+        /// <param name="selectedDates">需要设置为“选中”状态的日期</param>
         private void GenerateCalendar(HtmlControl parentNode, DateTime mn, int[] selectedDates)
         {
             DateTime d = new DateTime(mn.Year, mn.Month, 1);
             int start_day = (int)d.DayOfWeek; // cast enum type to an integer
 
-            // 日期（周）表头
+            // 1. 日期（周）表头
             char[] arrWeekHeaders = {'一', '二', '三', '四', '五', '六', '日' };
             Panel divWeekHeader = new Panel();
             divWeekHeader.CssClass = "calendar_week";
@@ -161,21 +153,24 @@ namespace HuangDao
                 divWeekHeader.Controls.Add(lkbtn);
             }
 
-            int[,] Month = new int[5, 7];
-            for (int i = 0; i < 5; i++)
+            // 2. 整月的日期单元
+            int[,] Month = new int[5, 7]; // N.B. 二维数组
+            for (int i = 0; i < 5; i++) // 每一周显示为一行，一共 5 行
             {
                 Panel divWeek = new Panel();
                 divWeek.CssClass = "calendar_week";
                 parentNode.Controls.Add(divWeek);
  
-                for(int j = 0; j < 7; j++)
+                for(int j = 0; j < 7; j++) // 每一周 7 天
                 {
                     LinkButton lkbtn = new LinkButton();
 
                     if ((--start_day) <= 0 && (d.Month == mn.Month))
                     { 
                         lkbtn.Text = d.Day.ToString() ;
-                        
+                        lkbtn.PostBackUrl = "huangli.aspx?hld=" + d.ToString("yyyy-MM-dd");
+
+                        // 设置候选日期（设置样式的 class 属性）
                         bool bFoundSelected = false;
                         for (int m = 0; m < selectedDates.Length; m++)
                         {
@@ -197,17 +192,13 @@ namespace HuangDao
                         
                         d = d.AddDays(1); // Forward to next day of this month
                     }
-                    else
+                    else // 当月该单元格无相应的日期
                     {
                         lkbtn.Text = "*";
-
                         lkbtn.CssClass = "calendar_day invalid_day";
-                        
                     }
 
                     divWeek.Controls.Add(lkbtn);
-
-                    
                 }
             }
                 

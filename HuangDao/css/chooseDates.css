@@ -5,33 +5,55 @@
 }
 
 #hl_word span{
-    display:block;
+    display:inline-block;
 }
 
 #hl_month{
-    display: inline-block;
-    margin-left:6px;
-    margin-bottom:8px;
+    display: block;
+    
+    padding: 8px 0px 6px 6px;
+    background-color: #FEDEDE;
 }
 
 #hl_month span{
-    font-size: 0.8em;
+    font-size:1em;
     font-weight:bold;
+    line-height: 1.5em;
     color: #FF7474;
-   
+}
+
+#solarMonth,#lunarMonth,#AncientDate{
+    display: inline-block;
+    background-color: #FFE8E7;
+    padding:0px 6px 0px 6px;
+    margin:0px 0px 3px 0px;
+    border-radius: 3px
+}
+
+.yiji_word_panel
+{
+    display: block;
+    background-color: #feecec;
+}
+
+.hl_word_abstract{
+    display: inline-block;
+    padding: 6px 10px 6px 10px;
+    font-size:1em;
+    height: 3em;
+    width:70%;
 }
 
 #lbWord {
     color: #FFF;
     background-color: #FF7474;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
-    padding: 5px 5px;
+    line-height: 1.5em;
+    height: 1.5em;
+    padding: 6px 8px 6px 8px;
 }
-.hl_word_abstract{
-    height:20px;
-    padding: 1px 0px 0px 0px;
-}
+
 #lbDetail {
     margin-top: 10px;
     font-size: 0.8em;
@@ -43,35 +65,69 @@
     height: 30px;
 }
 
-    #hl_dates span {
-        background-color: #feecec;
-        color: #ff0000;
-        margin: 1px 4px 3px 0px;
-        padding: 8px 6px 6px 6px;
-        font-size: 0.8em;
-        font-weight: bold;
-        display: block;
-        float: left;
-        line-height: 1em;
-    }
+#hl_dates span {
+    background-color: #feecec;
+    color: #ff0000;
+    margin: 1px 4px 3px 0px;
+    padding: 8px 6px 6px 6px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    float: left;
+    line-height: 1em;
+}
 
-        #hl_dates span:hover {
-            background-color: #ff0000;
-            color: #feecec;
-        }
+#hl_dates span:hover {
+    background-color: #ff0000;
+    color: #feecec;
+}
+
+/*  宜忌切换按钮 */
+.yi_color{
+    background-color:#FF9191;
+}
+.ji_color{
+    background-color:#AEB4F8;
+}
+
+.yiji_switch_bar{
+    clear:both;
+    display: inline-block;
+    width:100%;
+    background-color:#FFCACA;
+}
+
+.yiji_switch_bar span {
+    color:white;
+    font-weight:bold;
+    font-size:2em; 
+    line-height:1.5em;        
+}
+
+.button {
+    text-align:center;
+    width:100px;
+    float:left;
+
+}
+
+/* ------------------------- */
 
 #ctl_calendar {
-    margin-top: 20px;
+    margin-top: 0px;
     clear: both;
     min-width: 235px;
     text-align: center;
+    background-color:#FFD4D4;
+    display: block;
+    padding: 5px 0px 5px 0px;
 }
 
-    #ctl_calendar a {
-        text-align: center;
-        text-decoration: none;
-    
-        font-weight: bold;
+#ctl_calendar a {
+    text-align: center;
+    text-decoration: none;
+
+    font-weight: bold;
 }
 
 .calendar_day {
@@ -96,7 +152,7 @@
 }
 
 .selected_day:after{
-    content:"宜";
+    content:"宜";
     font-size:0.3em;
     font-weight:normal;
     color: #F00;
@@ -106,8 +162,7 @@
 }
 
 .calendar_week {
-    height: 28px;
-    margin-bottom: 20px;
+    background-color: #FFC7C7;
 }
 
 .calendar_header {
